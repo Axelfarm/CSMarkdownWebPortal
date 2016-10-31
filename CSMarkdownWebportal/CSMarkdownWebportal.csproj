@@ -87,16 +87,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\app.component.spec.ts" />
-    <TypeScriptCompile Include="app\app.component.ts" />
-    <TypeScriptCompile Include="app\app.module.ts" />
+    <TypeScriptCompile Include="app\Tests\app.component.spec.ts" />
+    <TypeScriptCompile Include="app\Components\app.component.ts" />
+    <TypeScriptCompile Include="app\Modules\app.module.ts" />
     <TypeScriptCompile Include="app\main.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\Components\" />
+    <Folder Include="app\Services\" />
+    <Folder Include="app\Styles\" />
+    <Folder Include="app\Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
