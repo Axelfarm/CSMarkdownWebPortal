@@ -1,4 +1,5 @@
-﻿class ReportModel {
+﻿//Nicholai
+class ReportModel {
     reportID: string;
     name: string;
     parameters: Array<ParameterModel>;
