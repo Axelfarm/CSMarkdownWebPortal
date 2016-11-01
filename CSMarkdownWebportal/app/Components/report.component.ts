@@ -2,7 +2,7 @@
 
 @Component({
     selector: 'report-window',
-    template: ""
+    templateUrl: './app/Tests/Documents/TestFile.html'
 })
 export class ReportComponent {
     ShowReport(report: ReportModel, parameters: ParameterModel): void {
