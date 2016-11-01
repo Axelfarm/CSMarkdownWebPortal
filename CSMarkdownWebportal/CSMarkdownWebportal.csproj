@@ -68,6 +68,32 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\cerulean.css" />
+    <Content Include="css\cosmo.css" />
+    <Content Include="css\cyborg.css" />
+    <Content Include="css\darkly.css" />
+    <Content Include="css\default.css" />
+    <Content Include="css\flatly.css" />
+    <Content Include="css\journal.css" />
+    <Content Include="css\lumen.css" />
+    <Content Include="css\nvd3.css" />
+    <Content Include="css\paper.css" />
+    <Content Include="css\readable.css" />
+    <Content Include="css\responsive-tables.css" />
+    <Content Include="css\rotate.css" />
+    <Content Include="css\sandstone.css" />
+    <Content Include="css\simplex.css" />
+    <Content Include="css\slate.css" />
+    <Content Include="css\spacelab.css" />
+    <Content Include="css\superhero.css" />
+    <Content Include="css\united.css" />
+    <Content Include="css\yeti.css" />
+    <Content Include="img\frontmatec.png" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\d3.js" />
+    <Content Include="js\jQuery.js" />
+    <Content Include="js\nvd3.js" />
+    <Content Include="js\responsive-tables.js" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
