@@ -1,7 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
     selector: 'my-app',
-    template: `<h1>My First Angular App</h1>`
+    template: '<iframe src=\"http://localhost/csmarkdown/render/markdown_2_legends \"></iframe>'
 })
-export class AppComponent { }
+export class AppComponent implements OnInit {
+    ngOnInit() {
+        //document.getElementById("e").innerHTML = "";
+        
+    }
+
+}

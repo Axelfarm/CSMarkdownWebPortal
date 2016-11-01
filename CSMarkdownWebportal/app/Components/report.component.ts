@@ -2,7 +2,7 @@
 
 @Component({
     selector: 'report-window',
-    template: new HTMLDocument() = "";
+    template: ""
 })
 export class ReportComponent {
     ShowReport(report: ReportModel, parameters: ParameterModel): void {
@@ -12,4 +12,5 @@ export class ReportComponent {
     ExportToPDF(report: ReportModel, parameters: ParameterModel): void {
 
     }
+
 }
