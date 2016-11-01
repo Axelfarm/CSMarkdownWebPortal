@@ -3,7 +3,8 @@
 
 @Component({
     selector: 'report-window',
-    template: '<iframe src=\"http://localhost/csmarkdown/render/markdown_2_legends \"></iframe>'
+    templateUrl: 'app/Views/report.component.html',
+    styleUrls: ['app/Styles/report.component.css']
 })
 export class ReportComponent implements OnInit {
     ngOnInit() {

@@ -68,7 +68,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\Styles\report.component.css" />
     <Content Include="app\Tests\Documents\TestFile.html" />
+    <Content Include="app\Views\report.component.html" />
     <Content Include="css\cerulean.css" />
     <Content Include="css\cosmo.css" />
     <Content Include="css\cyborg.css" />
@@ -127,10 +129,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="app\Styles\" />
-    <Folder Include="app\Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
