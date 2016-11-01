@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\Tests\Documents\TestFile.html" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
@@ -87,6 +88,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\Components\report.component.ts" />
+    <TypeScriptCompile Include="app\Models\parameter.model.ts" />
+    <TypeScriptCompile Include="app\Models\report.model.ts" />
+    <TypeScriptCompile Include="app\Modules\report.module.ts" />
+    <TypeScriptCompile Include="app\Services\export.service.ts" />
     <TypeScriptCompile Include="app\Tests\app.component.spec.ts" />
     <TypeScriptCompile Include="app\Components\app.component.ts" />
     <TypeScriptCompile Include="app\Modules\app.module.ts" />
@@ -96,7 +102,6 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\Services\" />
     <Folder Include="app\Styles\" />
     <Folder Include="app\Views\" />
   </ItemGroup>
