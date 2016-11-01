@@ -1,15 +1,13 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+
 
 @Component({
     selector: 'report-window',
-    templateUrl: './app/Tests/Documents/TestFile.html'
+    template: '<iframe src=\"http://localhost/csmarkdown/render/markdown_2_legends \"></iframe>'
 })
-export class ReportComponent {
-    ShowReport(report: ReportModel, parameters: ParameterModel): void {
-
-    }
-
-    ExportToPDF(report: ReportModel, parameters: ParameterModel): void {
+export class ReportComponent implements OnInit {
+    ngOnInit() {
+        //document.getElementById("e").innerHTML = "";
 
     }
 
