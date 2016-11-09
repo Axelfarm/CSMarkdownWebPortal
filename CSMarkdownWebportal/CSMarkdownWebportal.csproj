@@ -68,9 +68,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\Styles\app.component.css" />
+    <Content Include="app\Styles\reports.component.css" />
+    <Content Include="app\Styles\parameters.component.css" />
     <Content Include="app\Styles\report.component.css" />
     <Content Include="app\Tests\Documents\TestFile.html" />
+    <Content Include="app\Views\app.component.html" />
+    <Content Include="app\Views\parameters.component.html" />
     <Content Include="app\Views\report.component.html" />
+    <Content Include="app\Views\reports.component.html" />
     <Content Include="css\cerulean.css" />
     <Content Include="css\cosmo.css" />
     <Content Include="css\cyborg.css" />
@@ -116,11 +122,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\Components\parameters.component.ts" />
     <TypeScriptCompile Include="app\Components\report.component.ts" />
+    <TypeScriptCompile Include="app\Components\reports.component.ts" />
     <TypeScriptCompile Include="app\Models\parameter.model.ts" />
     <TypeScriptCompile Include="app\Models\report.model.ts" />
-    <TypeScriptCompile Include="app\Modules\report.module.ts" />
-    <TypeScriptCompile Include="app\Services\export.service.ts" />
+    <TypeScriptCompile Include="app\Services\report.service.ts" />
     <TypeScriptCompile Include="app\Tests\app.component.spec.ts" />
     <TypeScriptCompile Include="app\Components\app.component.ts" />
     <TypeScriptCompile Include="app\Modules\app.module.ts" />

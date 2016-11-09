@@ -4,11 +4,13 @@
     <title>CSMarkdown-Webportal</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+    <!--<link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="css/default.css" />
     <link rel="stylesheet" href="css/nvd3.css" />
     <link rel="screen" href="css/rotate.css" />
-    <link rel="screen" href="css/responsive-tables.css" />
+    <link rel="screen" href="css/responsive-tables.css" />-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
     <!-- Polyfill(s) for older browsers -->
 
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -17,19 +19,18 @@
     <script src="node_modules/systemjs/dist/system.src.js"></script>
     <script src="systemjs.config.js"></script>
 
-    <script src="js/jQuery.js"></script>
+    <!--<script src="js/jQuery.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/d3.js"></script>
     <script src="js/nvd3.js"></script>
-    <script src="js/responsive-tables.js"></script>
+    <script src="js/responsive-tables.js"></script>-->
 
 
     <script>
         System.import('app').catch(function (err) { console.error(err); });
     </script>
 </head>
-<body>
-    <!--Nicholai-->
-    <report-window></report-window>
+<body class="container-fluid">
+    <my-app></my-app>
 </body>
 </html>
