@@ -1,5 +1,7 @@
-﻿//Nicholai
-class ReportModel {
+﻿import { ParameterModel } from './parameter.model'
+
+//Nicholai
+export class ReportModel {
     reportID: string;
     name: string;
     parameters: Array<ParameterModel>;
