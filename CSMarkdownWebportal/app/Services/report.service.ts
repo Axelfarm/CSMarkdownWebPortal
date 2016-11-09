@@ -2,7 +2,7 @@
 import { Http } from '@angular/http'
 import 'rxjs/add/operator/map';
 
-import { ReportModel } from './../Models/report.model'
+import { ReportModel } from './../Models/report.model';
 
 @Injectable()
 export class ReportService {

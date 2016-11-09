@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from './../Services/report.service';
 
-
+import { ReportModel } from './../Models/report.model';
 
 @Component({
     selector: 'parameters',

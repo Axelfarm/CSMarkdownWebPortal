@@ -1,4 +1,4 @@
-﻿import { ParameterModel } from './parameter.model'
+﻿import { ParameterModel } from './parameter.model';
 
 //Nicholai
 export class ReportModel {
