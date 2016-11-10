@@ -20,10 +20,6 @@ export class ReportService {
     ShowReport() {
         return this.baseUrl + "render/markdown_render_10_charts" //+ report.name;
     }
-
-
-    data: any;
-    logError: any;
     //Mads Nørgaard
     GetReports() {
         /*return this.http.get(this.baseUrl + "getReports")
@@ -43,7 +39,7 @@ export class ReportService {
 
     }
 
-    //Mads Nørgaard
+    //Nicholai Axelgaard
     GetParameters(report: ReportModel) {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
        return this.http.get(this.baseUrl + "params/" + report.name)
