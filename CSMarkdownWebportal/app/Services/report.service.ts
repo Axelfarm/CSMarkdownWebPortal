@@ -42,13 +42,10 @@ export class ReportService {
     //Nicholai Axelgaard
     GetParameters(report: ReportModel) {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
-       return this.http.get(this.baseUrl + "params/" + report.name)
-            .map(res => res.json())
-            .subscribe(
-            data => this.data = data,
-            err => this.logError(err),
-            () => console.log(this.data)
-            );
+        return this.http.get(this.baseUrl + "params/" + report.name)
+            .map(res => res.json());
+            
+        //return this.data;
     }
 
     private handleError(error: Response) {
