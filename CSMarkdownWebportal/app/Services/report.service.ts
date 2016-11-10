@@ -28,7 +28,7 @@ export class ReportService {
 
     //Mads Nørgaard
     GetParameters(report: ReportModel) {
-        this.http.get(this.baseUrl + "parameters/" + report.name).map(res => res.json);
+        return this.http.get(this.baseUrl + "params/" + report.name).map(res => res.json());
     }
 
     
