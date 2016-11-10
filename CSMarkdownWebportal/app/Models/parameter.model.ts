@@ -1,5 +1,5 @@
 ﻿// Nicholai
-class ParameterModel {
+export class ParameterModel {
     key: string;
     values: Array<string>;
     paramType: string;

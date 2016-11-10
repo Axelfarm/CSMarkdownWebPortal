@@ -2,7 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from './../Services/report.service';
 
+import { Http, Headers } from '@angular/http';
 
+import { ReportModel } from './../Models/report.model';
 
 @Component({
     selector: 'parameters',
@@ -12,13 +14,32 @@ import { ReportService } from './../Services/report.service';
 })
 export class ParametersComponent implements OnInit {
 
-
-    constructor(private reportService: ReportService) {
+     randomQuote: any;
+ logError: any;
+    constructor(private reportService: ReportService, private http:Http) {
+        //this.GetParameters();
+        this.http.get('http://localhost/csmarkdown/params/markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to')
+            .map(res => res.text())
+            .subscribe(
+            data => this.randomQuote = data,
+            err => this.logError(err),
+            () => console.log(this.randomQuote)
+            );
+    
 
     }
 
     ngOnInit() {
-        this.reportService.GetParameters();
     }
 
+    GetParameters() {
+
+
+
+        //var rep: ReportModel = new ReportModel();
+        //rep.name = "markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to";
+        //rep.reportID = "markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to";
+        //var test: any = this.reportService.GetParameters(rep);
+        //console.log(test);
+    }
 }

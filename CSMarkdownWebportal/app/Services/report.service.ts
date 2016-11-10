@@ -3,6 +3,8 @@ import { Http, Response } from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 
+import { ReportModel } from './../Models/report.model';
+
 @Injectable()
 export class ReportService {
 
