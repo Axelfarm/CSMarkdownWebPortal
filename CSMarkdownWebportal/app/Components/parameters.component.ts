@@ -14,31 +14,28 @@ import { ReportModel } from './../Models/report.model';
 })
 export class ParametersComponent implements OnInit {
 
+    parameter: any;
      randomQuote: any;
  logError: any;
     constructor(private reportService: ReportService, private http:Http) {
-        //this.GetParameters();
-        this.http.get('http://localhost/csmarkdown/params/markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to')
-            .map(res => res.text())
-            .subscribe(
-            data => this.randomQuote = data,
-            err => this.logError(err),
-            () => console.log(this.randomQuote)
-            );
+
     
 
     }
 
     ngOnInit() {
+        this.GetParameters();
     }
 
     GetParameters() {
-
-
+        var rep = new ReportModel();
+        rep.name = 'markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to';
+        this.parameter = this.reportService.GetParameters(rep);
+        console.log(this.parameter)
 
         //var rep: ReportModel = new ReportModel();
-        //rep.name = "markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to";
-        //rep.reportID = "markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to";
+        //rep.name = 'markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to';
+        //rep.reportID = 'markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to';
         //var test: any = this.reportService.GetParameters(rep);
         //console.log(test);
     }
