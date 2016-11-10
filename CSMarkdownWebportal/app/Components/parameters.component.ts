@@ -18,13 +18,13 @@ export class ParametersComponent implements OnInit {
  logError: any;
     constructor(private reportService: ReportService, private http:Http) {
         //this.GetParameters();
-        this.http.get('http://localhost/csmarkdown/params/markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to')
+        /*this.http.get('http://localhost/csmarkdown/params/markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to')
             .map(res => res.text())
             .subscribe(
             data => this.randomQuote = data,
             err => this.logError(err),
             () => console.log(this.randomQuote)
-            );
+            );*/
     
 
     }
