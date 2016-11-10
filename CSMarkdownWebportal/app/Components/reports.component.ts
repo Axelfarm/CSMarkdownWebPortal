@@ -1,6 +1,7 @@
 ﻿//Mads Nørgaard
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from './../Services/report.service';
+import 'rxjs/Rx';
 
 
 
@@ -43,20 +44,27 @@ export class ReportsComponent implements OnInit {
         "markdown_syntax_test.smd",
         "markdown_table.smd",
         "markdown_table_with_options.smd",
-        ];
+    ];
+
+    test: any;
 
     constructor(private reportService: ReportService) {
 
     }
 
     ngOnInit() {
-   
+        this.GetReports();
     }
 
     GetReports() {
-        return this.reportService.GetReports();
+        this.test = this.reportService.GetReports()
+            .subscribe(data => this.test = data);
+        console.log(this.test);
     }
 
+    generateArray(obj) {
+        return Object.keys(obj).map((key) => { return obj[key] });
+    }
 
 
 }

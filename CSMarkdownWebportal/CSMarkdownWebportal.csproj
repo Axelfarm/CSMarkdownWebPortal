@@ -116,7 +116,9 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="styles.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,6 +129,7 @@
     <TypeScriptCompile Include="app\Components\reports.component.ts" />
     <TypeScriptCompile Include="app\Models\parameter.model.ts" />
     <TypeScriptCompile Include="app\Models\report.model.ts" />
+    <TypeScriptCompile Include="app\Pipes\test.pipe.ts" />
     <TypeScriptCompile Include="app\Services\report.service.ts" />
     <TypeScriptCompile Include="app\Tests\app.component.spec.ts" />
     <TypeScriptCompile Include="app\Components\app.component.ts" />

@@ -1,6 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http } from '@angular/http'
-import 'rxjs/add/operator/map';
+import { Http, Response } from '@angular/http'
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 import { ReportModel } from './../Models/report.model';
 
@@ -18,13 +19,14 @@ export class ReportService {
     //Nicholai
     ShowReport() {
         return this.baseUrl + "render/markdown_render_10_charts" //+ report.name;
-
-        
     }
 
     //Mads Nørgaard
     GetReports() {
-        return this.http.get(this.baseUrl + "getReports").map(res => res.json);
+        return this.http.get(this.baseUrl + "getReports")
+            .map(res => res.json)
+            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .catch(this.handleError);
     }
 
     //Mads Nørgaard
@@ -39,5 +41,9 @@ export class ReportService {
             );
     }
 
+    private handleError(error: Response) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+    }
     
 }
