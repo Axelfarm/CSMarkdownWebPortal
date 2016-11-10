@@ -21,12 +21,26 @@ export class ReportService {
         return this.baseUrl + "render/markdown_render_10_charts" //+ report.name;
     }
 
+
+    data: any;
+    logError: any;
     //Mads Nørgaard
     GetReports() {
-        return this.http.get(this.baseUrl + "getReports")
+        /*return this.http.get(this.baseUrl + "getReports")
             .map(res => res.json)
             .do(data => console.log('All: ' + JSON.stringify(data)))
-            .catch(this.handleError);
+            .catch(this.handleError);*/
+
+        
+
+        return this.http.get(this.baseUrl + 'getReports')
+            .map(res => res.json())
+            .subscribe(
+            data => this.data = data,
+            err => this.logError(err),
+            () => console.log(this.data)
+            );
+
     }
 
     //Mads Nørgaard

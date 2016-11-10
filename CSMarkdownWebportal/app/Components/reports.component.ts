@@ -57,8 +57,7 @@ export class ReportsComponent implements OnInit {
     }
 
     GetReports() {
-        this.test = this.reportService.GetReports()
-            .subscribe(data => this.test = data);
+        this.test = this.reportService.GetReports();
         console.log(this.test);
     }
 
