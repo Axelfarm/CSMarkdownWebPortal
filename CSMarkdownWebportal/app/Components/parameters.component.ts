@@ -18,7 +18,7 @@ export class ParametersComponent implements OnInit {
     }
 
     ngOnInit() {
-        
+        this.reportService.GetParameters();
     }
 
 }
