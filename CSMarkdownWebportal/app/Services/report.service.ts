@@ -10,20 +10,19 @@ import { ReportModel } from './../Models/report.model';
 export class ReportService {
     data: any;
     logError: any;
+    report: string;
+    private baseUrl = "http://localhost/csmarkdown/";
     constructor(private http: Http) {
 
     }
 
-    report: string;
-    private baseUrl = "http://localhost/csmarkdown/";
-    data: Object;
-    private logError: any;
-
-    //Nicholai
+    //Nicholai Axelgaard
     ShowReport() {
         //console.log(this.report);
-        return this.baseUrl + "render/" + this.report;  //+ report.name;
+        return this.baseUrl + "render/" + this.report;
     }
+
+
     //Mads Nørgaard
     GetReports(){
         return this.http.get(this.baseUrl + "getReports");
