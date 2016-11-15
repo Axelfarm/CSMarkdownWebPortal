@@ -8,7 +8,8 @@ import { ReportModel } from './../Models/report.model';
 
 @Injectable()
 export class ReportService {
-
+    data: any;
+    logError: any;
     constructor(private http: Http) {
 
     }
@@ -23,8 +24,6 @@ export class ReportService {
         //console.log(this.report);
         return this.baseUrl + "render/" + this.report;  //+ report.name;
     }
-
-
     //Mads Nørgaard
     GetReports(){
         return this.http.get(this.baseUrl + "getReports");
@@ -43,10 +42,18 @@ export class ReportService {
         //return this.data;
     }
 
-    //Mads Nørgaard
-    GetParameters() {
-        this.http.get(this.baseUrl + "params/markdown_render_10_charts").map(res => res.json);
+    //Nicholai Axelgaard
+    GetParameters(report: ReportModel) {
+        //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
+        return this.http.get(this.baseUrl + "params/" + report.name)
+            .map(res => res.json());
+            
+        //return this.data;
     }
 
+    private handleError(error: Response) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+    }
     
 }
