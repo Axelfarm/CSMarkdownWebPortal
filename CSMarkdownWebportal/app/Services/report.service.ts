@@ -1,6 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http'
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/Rx';
 
 import { ReportModel } from './../Models/report.model';
@@ -12,34 +13,34 @@ export class ReportService {
 
     }
 
-    baseUrl = "http://localhost/csmarkdown/";
+    report: string;
+    private baseUrl = "http://localhost/csmarkdown/";
+    data: Object;
+    private logError: any;
 
-    //report: ReportModel
     //Nicholai
     ShowReport() {
-        return this.baseUrl + "render/markdown_render_10_charts" //+ report.name;
+        //console.log(this.report);
+        return this.baseUrl + "render/" + this.report;  //+ report.name;
     }
 
 
-    data: any;
-    logError: any;
     //Mads Nørgaard
-    GetReports() {
-        /*return this.http.get(this.baseUrl + "getReports")
-            .map(res => res.json)
-            .do(data => console.log('All: ' + JSON.stringify(data)))
-            .catch(this.handleError);*/
+    GetReports(){
+        return this.http.get(this.baseUrl + "getReports");
+            
+
+        /*this.http.get(this.baseUrl + 'getReports')
+            .map(res => { return  res.json() })
+            .subscribe(
+            (data) => this.data = data,
+            (err) => this.logError(err),
+            () => console.log(this.data)
+            );*/
 
         
-
-        return this.http.get(this.baseUrl + 'getReports')
-            .map(res => res.json())
-            .subscribe(
-            data => this.data = data,
-            err => this.logError(err),
-            () => console.log(this.data)
-            );
-
+        //console.log(this.data);
+        //return this.data;
     }
 
     //Mads Nørgaard
