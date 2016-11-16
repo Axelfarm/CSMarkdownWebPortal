@@ -1,6 +1,7 @@
 ﻿//Mads Nørgaard
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from './../Services/report.service';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/Rx';
 
 
@@ -8,42 +9,41 @@ import 'rxjs/Rx';
 @Component({
     selector: 'reports',
     templateUrl: 'app/Views/reports.component.html',
-    providers: [ReportService],
     styleUrls: ['app/Styles/reports.component.css']
 })
 export class ReportsComponent implements OnInit {
 
-    reports = ["markdown_001.smd",
-        "markdown_002.smd",
-        "markdown_2_legends.smd",
-        "markdown_2_legends_1_type.smd",
-        "markdown_2_legends_2_types.smd",
-        "markdown_2_legends_2_types_4_different_date_formats.smd",
-        "markdown_3_legends_with_array_of_dates_readTags.smd",
-        "markdown_5_legends_using_readTags.smd",
-        "markdown_custom_dateformat.smd",
-        "markdown_display_error.smd",
-        "markdown_display_message.smd",
-        "markdown_display_warning.smd",
-        "markdown_error_display.smd",
-        "markdown_error_throw.smd",
-        "markdown_failure.smd",
-        "markdown_inline_code.smd",
-        "markdown_legend.smd",
-        "markdown_min_and_max_values.smd",
-        "markdown_min_value.smd",
-        "markdown_multiple_value_without_legends.smd",
-        "markdown_multiple_value_with_legends_defined.smd",
-        "markdown_no_legends.smd",
-        "markdown_null_data.smd",
-        "markdown_parameters.smd",
-        "markdown_pie_and_donut_chart.smd",
-        "markdown_read_excel_csv.smd",
-        "markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to.smd",
-        "markdown_render_10_charts.smd",
-        "markdown_syntax_test.smd",
-        "markdown_table.smd",
-        "markdown_table_with_options.smd",
+    reports = ["markdown_001",
+        "markdown_002",
+        "markdown_2_legends",
+        "markdown_2_legends_1_type",
+        "markdown_2_legends_2_types",
+        "markdown_2_legends_2_types_4_different_date_formats",
+        "markdown_3_legends_with_array_of_dates_readTags",
+        "markdown_5_legends_using_readTags",
+        "markdown_custom_dateformat",
+        "markdown_display_error",
+        "markdown_display_message",
+        "markdown_display_warning",
+        "markdown_error_display",
+        "markdown_error_throw",
+        "markdown_failure",
+        "markdown_inline_code",
+        "markdown_legend",
+        "markdown_min_and_max_values",
+        "markdown_min_value",
+        "markdown_multiple_value_without_legends",
+        "markdown_multiple_value_with_legends_defined",
+        "markdown_no_legends",
+        "markdown_null_data",
+        "markdown_parameters",
+        "markdown_pie_and_donut_chart",
+        "markdown_read_excel_csv",
+        "markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to",
+        "markdown_render_10_charts",
+        "markdown_syntax_test",
+        "markdown_table",
+        "markdown_table_with_options",
     ];
 
     test: any;
@@ -54,16 +54,26 @@ export class ReportsComponent implements OnInit {
 
     ngOnInit() {
         this.GetReports();
+        console.log(this.reportService.data);
     }
 
     GetReports() {
-        this.test = this.reportService.GetReports();
+        /*this.test = this.reportService.GetReports();
+        console.log(this.test);*/
+
+        this.reportService.GetReports()
+            .map(res => res.json())
+            .subscribe(data => this.test = data);
+
         console.log(this.test);
     }
 
-    generateArray(obj) {
-        return Object.keys(obj).map((key) => { return obj[key] });
+    ShowReport(report: string) {
+        //console.log(this.reportService.report);
+        this.reportService.report = report;
+        //console.log(this.reportService.report);
     }
+    
 
 
 }

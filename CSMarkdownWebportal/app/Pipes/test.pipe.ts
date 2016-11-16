@@ -1,16 +1,11 @@
 ﻿import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'Values' })
+@Pipe({ name: 'Json' })
 export class TestPipe implements PipeTransform {
 
-    transform(value: any[], args?: any[]): any[] {
-        let keyArr: any[] = Object.keys(value),
-        dataArr = [];
+    transform(value: Object, args?: any[]): any[] {
 
-        keyArr.forEach((key: any) => {
-            dataArr.push(value[key]);
-        });
 
-        return dataArr;
+        return [];
     }
 }

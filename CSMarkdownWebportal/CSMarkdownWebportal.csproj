@@ -124,6 +124,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\app.routing.ts" />
     <TypeScriptCompile Include="app\Components\parameters.component.ts" />
     <TypeScriptCompile Include="app\Components\report.component.ts" />
     <TypeScriptCompile Include="app\Components\reports.component.ts" />

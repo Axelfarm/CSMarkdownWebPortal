@@ -2,4 +2,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './Modules/app.module';
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+//Shared service
+import { ReportService } from './Services/report.service';
+
+platformBrowserDynamic().bootstrapModule(AppModule, [ReportService]);
