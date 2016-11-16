@@ -1,5 +1,6 @@
 ﻿//Mads Nørgaard
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 import { ReportService } from './../Services/report.service';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/Rx';
@@ -46,7 +47,8 @@ export class ReportsComponent implements OnInit {
         "markdown_table_with_options",
     ];
 
-    test: any;
+    test: string;
+    logError: any;
 
     constructor(private reportService: ReportService) {
 
@@ -54,16 +56,37 @@ export class ReportsComponent implements OnInit {
 
     ngOnInit() {
         this.GetReports();
-        console.log(this.reportService.data);
+        //console.log(this.reportService.data);
     }
 
     GetReports() {
         /*this.test = this.reportService.GetReports();
         console.log(this.test);*/
 
-        this.reportService.GetReports()
-            .map(res => res.json())
-            .subscribe(data => this.test = data);
+        this.reportService.GetReports().subscribe(
+            (data) => this.test = data,
+            (err) => this.logError(err),
+            () => console.log(this.test)
+        );/*.subscribe(data => this.test = data,
+            () => {
+                console.log(this.test);
+            });
+
+
+        /*this.reportService.GetParameters(rep).subscribe(
+            data => this.data = data,
+            err => this.logError(err),
+            () => {
+                console.log(this.data);
+                for (var i = 0; this.data.length > i; i++) {
+                    console.log(this.data[i]);
+                    var currentObject: Object = this.data[i];
+                    for (let identifier in this.data[i]) {
+                        console.log(currentObject[identifier]);
+                    }
+                }
+            }
+        );*/
 
         console.log(this.test);
     }
@@ -73,6 +96,8 @@ export class ReportsComponent implements OnInit {
         this.reportService.report = report;
         //console.log(this.reportService.report);
     }
+
+
     
 
 

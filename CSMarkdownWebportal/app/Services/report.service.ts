@@ -24,8 +24,8 @@ export class ReportService {
 
 
     //Mads Nørgaard
-    GetReports(){
-        return this.http.get(this.baseUrl + "getReports");
+    GetReports() {
+        return this.http.get(this.baseUrl + "getReports").map((res: Response) => res.json());
             
 
         /*this.http.get(this.baseUrl + 'getReports')
@@ -54,5 +54,12 @@ export class ReportService {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
-    
+
+    private extractData(res: Response) {
+        let body = res.json();
+        //return body.data || {};
+        this.data = body.data;
+        console.log('Body.data: ' + body.data);
+        console.log('this.data: ' + this.data);
+    }  
 }
