@@ -1,12 +1,12 @@
 ﻿// Nicholai
 export class ParameterModel {
-    key: string;
-    values: Array<string>;
-    paramType: string;
+    Key: string;
+    Value: Array<string>;
+    ParamType: string;
 
-    constructor(key: string, values: string, paramType: string) {
-        this.key = key;
-        this.values = values.split(",");
-        this.paramType = paramType;
-    }
+    //constructor(key: string, values: string, paramType: string) {
+    //    this.Key = key;
+    //    this.Values = values.split(",");
+    //    this.ParamType = paramType;
+    //}
 }

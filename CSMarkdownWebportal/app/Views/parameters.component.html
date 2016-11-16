@@ -1,12 +1,21 @@
 ﻿<!--Mads Nørgaard-->
 <div style="border-top: 1px solid black">
     <ul>
-        <li>Param 1</li>
-        <li>Param 2</li>
-        <li>Param 3</li>
-        <li>Param 4</li>
-        <li>Param 5</li>
-        <li>Param 6</li>
-        <li>Param 7</li>
+        <li *ngFor="let param of report.parameters" style="list-style:none; margin-top: 20px">
+
+            <div style="border-top:solid; border-top-width:thin">
+                <label style="float:left">
+                    {{param.Key}}
+                </label>
+                <ul style="list-style:none">
+                    <li *ngFor="let value of param.Value" style="margin-top:5px">
+                        <div *ngFor="let val of SplitValueForMultipleInputFields(param.ParamType, value)" style="display:inline">
+                            <input type="{{val[0]}}" value="{{val[1]}}"/>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
+    <button (click)="ShowReportInLog($event)"></button>
 </div>

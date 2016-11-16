@@ -6,6 +6,8 @@ import { Http, Headers } from '@angular/http';
 
 import { ReportModel } from './../Models/report.model';
 
+import { ParameterModel } from './../Models/parameter.model';
+
 @Component({
     selector: 'parameters',
     templateUrl: 'app/Views/parameters.component.html',
@@ -15,40 +17,45 @@ import { ReportModel } from './../Models/report.model';
 export class ParametersComponent implements OnInit {
 
     data: Array<Array<any>>;
-    parameter: any;
-    randomQuote: any;
     logError: any;
+
+
+    report: ReportModel;
     constructor(private reportService: ReportService, private http: Http) {
-
-
-
-    }
-
-    ngOnInit() {
         this.GetParameters();
     }
 
-    GetParameters() {
-        var rep = new ReportModel();
-        rep.name = 'markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to';
-        this.reportService.GetParameters(rep).subscribe(
+    ngOnInit() {
+    }
+
+    // PT Is the report name hardcoded, but when it is made so that it sends the report to this component, then it will showhow
+    // set this.report to the received report object.
+    GetParameters(): void {
+        // These two lines of code are currently hardcoded, but in the future it needs to be replace by fx
+        // a report object defined at an earlier stage.
+        this.report = new ReportModel();
+        this.report.name = 'markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to';
+        this.reportService.GetParameters(this.report).subscribe(
             data => this.data = data,
             err => this.logError(err),
             () => {
-                console.log(this.data);
                 for (var i = 0; this.data.length > i; i++) {
-                    console.log(this.data[i]);
-                    var currentObject: Object = this.data[i];
-                    for (let identifier in this.data[i]) {
-                        console.log(currentObject[identifier]);
-                    }
+                    this.report.AddParamert(this.data[i]);
                 }
             }
         );
-        //var rep: ReportModel = new ReportModel();
-        //rep.name = 'markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to';
-        //rep.reportID = 'markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to';
-        //var test: any = this.reportService.GetParameters(rep);
-        //console.log(test);
+        //console.log(this.report);
+    }
+
+    SplitValueForMultipleInputFields(paramType: string, value: string): Array<Array<string>> {
+        var splitValues: Array<Array<string>> = new Array<Array<string>>();
+        if (paramType != undefined && paramType.toLowerCase().includes("date")) {
+            var arrOfValues: Array<string> = value.split("T");
+            splitValues.push([ "date", arrOfValues[0] ]);
+            splitValues.push([ "time", arrOfValues[1] ]);
+        }
+        else
+            splitValues.push(["text", value.trim()]);
+        return splitValues;
     }
 }
