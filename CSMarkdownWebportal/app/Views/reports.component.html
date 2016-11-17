@@ -1,5 +1,17 @@
 ﻿<!--Mads Nørgaard-->
 
-    <div *ngFor='let report of reportss.files'>
+    <!--<div *ngFor='let report of reportss.files'>
         <a (click)="ShowReport(report)">{{report}}</a><br/>
+    </div>-->
+
+    <div class="css-treeview">
+        <ul>
+            <li>
+                <input type="checkbox" id="item-0" /> <label for="item-0">{{reportss.name}}</label>
+                <ul *ngFor='let report of reportss.files'>
+                    <li><a (click)="ShowReport(report)">{{report}}</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
+
