@@ -15,7 +15,7 @@ import { ReportsModel } from './../Models/reports.model';
 export class ReportsComponent implements OnInit {
 
     //reports: Observable<any>;
-    test: any;
+    data: any;
     errorMsg: any;
     reportss = new ReportsModel();
 
@@ -36,18 +36,20 @@ export class ReportsComponent implements OnInit {
 
         this.reportService.GetReports()
             .subscribe(
-            data => this.test = data,
+            data => this.data = data,
             error => this.errorMsg = <any>error,
             () => {
                 //console.log(this.test);
-                this.reportss.name = this.test.Name;
-                this.reportss.files = this.test.Files;
+                this.reportss.name = this.data.Name;
+                this.reportss.files = this.data.Files;
                 for (var i = 0; i < this.reportss.files.length; i++) {
                     this.reportss.files[i] = this.reportss.files[i].replace(".smd", "");
                 }
-
-
+                if (this.data.Folders != " ") {
+                    
                 }
+
+            }
         );
 
 

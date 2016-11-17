@@ -4,12 +4,14 @@
         <a (click)="ShowReport(report)">{{report}}</a><br/>
     </div>-->
 
-    <div class="css-treeview">
+    <div class="css-treeview"> <!--http://codepen.io/tystrong/pen/cmxaJ-->
         <ul>
-            <li>
+            <li class="">
                 <input type="checkbox" id="item-0" /> <label for="item-0">{{reportss.name}}</label>
                 <ul *ngFor='let report of reportss.files'>
-                    <li><a (click)="ShowReport(report)">{{report}}</a></li>
+                    <li class="glyphicon glyphicon-file" >
+                        <a (click)="ShowReport(report)">{{report}}</a>
+                    </li>
                 </ul>
             </li>
         </ul>
