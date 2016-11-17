@@ -16,8 +16,7 @@ export class ReportService {
 
     report: string;
     private baseUrl = "http://localhost/csmarkdown/";
-    //data: Object;
-    //private logError: any;
+
 
     //Nicholai
     ShowReport() {
