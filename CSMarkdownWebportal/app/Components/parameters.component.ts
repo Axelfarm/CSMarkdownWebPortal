@@ -35,12 +35,12 @@ export class ParametersComponent implements OnInit {
             data => this.data = data,
             err => this.logError(err),
             () => {
-                console.log(this.data);
+                //console.log(this.data);
                 for (var i = 0; this.data.length > i; i++) {
-                    console.log(this.data[i]);
+                    //console.log(this.data[i]);
                     var currentObject: Object = this.data[i];
                     for (let identifier in this.data[i]) {
-                        console.log(currentObject[identifier]);
+                        //console.log(currentObject[identifier]);
                     }
                 }
             }
