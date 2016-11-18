@@ -8,37 +8,36 @@ import { ReportModel } from './../Models/report.model';
 
 @Injectable()
 export class ReportService {
-    data: any;
-    logError: any;
-    report: string;
+    
+    reportName: string;
     private baseUrl = "http://localhost/csmarkdown/";
     constructor(private http: Http) {
 
     }
 
     //Nicholai Axelgaard
-    ShowReport() {
+    ShowReport(): string {
         //console.log(this.report);
-        if (this.report != undefined)
+        if (this.reportName != undefined)
         {
-            return this.baseUrl + "render/" + this.report.replace(".smd", "");
+            return this.baseUrl + "render/" + this.reportName.replace(".smd", "");
         }
         else
         {
-            return this.baseUrl + "render/" + this.report;
+            return this.baseUrl + "render/" + this.reportName;
         }
         
     }
 
 
     //Mads Nørgaard
-    GetReports() {
+    GetReports(): Observable<any> {
         return this.http.get(this.baseUrl + "getReports").map((res: Response) => res.json());
             
     }
 
     //Nicholai Axelgaard
-    GetParameters(report: ReportModel) {
+    GetParameters(report: ReportModel): Observable<any> {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
         return this.http.get(this.baseUrl + "params/" + report.name)
             .map(res => res.json());
@@ -46,9 +45,6 @@ export class ReportService {
         //return this.data;
     }
 
-    private handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
-    }
+    
     
 }

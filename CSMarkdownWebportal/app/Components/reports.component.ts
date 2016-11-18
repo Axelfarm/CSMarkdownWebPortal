@@ -52,18 +52,13 @@ export class ReportsComponent implements OnInit {
             }
         );
 
-
-
-
-
-
         /*console.log("Test: " + this.test);
         console.log(this.reports);*/
     }
 
-    ShowReport(report: string) {
+    ShowReport(reportName: string) {
         //console.log(this.reportService.report);
-        this.reportService.report = report;
+        this.reportService.reportName = reportName;
         //console.log(this.reportService.report);
     }
     

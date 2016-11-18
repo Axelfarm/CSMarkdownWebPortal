@@ -18,10 +18,8 @@ export class ParametersComponent implements OnInit {
     parameter: any;
     randomQuote: any;
     logError: any;
+
     constructor(private reportService: ReportService, private http: Http) {
-
-
-
     }
 
     ngOnInit() {
