@@ -7,8 +7,6 @@ import { AppComponent } from './Components/app.component';
 
 const appRoutes: Routes = [
     { path: 'main', component: AppComponent },
-    { path: 'dashboard', component: AppComponent  },
-    { path: 'CV', component: AppComponent  },
     { path: '**', component: AppComponent  },
     { path: '', component: AppComponent  }
     // { path: 'TwitterAuthentication', component: TwitterComponent }

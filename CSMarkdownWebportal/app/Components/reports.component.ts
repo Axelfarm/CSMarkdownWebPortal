@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { ReportService } from './../Services/report.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
-
+import { ReportsModel } from './../Models/reports.model';
 
 
 @Component({
@@ -14,41 +15,10 @@ import 'rxjs/Rx';
 })
 export class ReportsComponent implements OnInit {
 
-    reports = ["markdown_001",
-        "markdown_002",
-        "markdown_2_legends",
-        "markdown_2_legends_1_type",
-        "markdown_2_legends_2_types",
-        "markdown_2_legends_2_types_4_different_date_formats",
-        "markdown_3_legends_with_array_of_dates_readTags",
-        "markdown_5_legends_using_readTags",
-        "markdown_custom_dateformat",
-        "markdown_display_error",
-        "markdown_display_message",
-        "markdown_display_warning",
-        "markdown_error_display",
-        "markdown_error_throw",
-        "markdown_failure",
-        "markdown_inline_code",
-        "markdown_legend",
-        "markdown_min_and_max_values",
-        "markdown_min_value",
-        "markdown_multiple_value_without_legends",
-        "markdown_multiple_value_with_legends_defined",
-        "markdown_no_legends",
-        "markdown_null_data",
-        "markdown_parameters",
-        "markdown_pie_and_donut_chart",
-        "markdown_read_excel_csv",
-        "markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to",
-        "markdown_render_10_charts",
-        "markdown_syntax_test",
-        "markdown_table",
-        "markdown_table_with_options",
-    ];
-
-    test: string;
-    logError: any;
+    //reports: Observable<any>;
+    data: any;
+    errorMsg: any;
+    reportss = new ReportsModel();
 
     constructor(private reportService: ReportService) {
 
@@ -57,38 +27,39 @@ export class ReportsComponent implements OnInit {
     ngOnInit() {
         this.GetReports();
         //console.log(this.reportService.data);
+        console.log(this.reportss);
     }
 
     GetReports() {
         /*this.test = this.reportService.GetReports();
         console.log(this.test);*/
 
-        this.reportService.GetReports().subscribe(
-            (data) => this.test = data,
-            (err) => this.logError(err),
-            () => console.log(this.test)
-        );/*.subscribe(data => this.test = data,
-            () => {
-                console.log(this.test);
-            });
 
-
-        /*this.reportService.GetParameters(rep).subscribe(
+        this.reportService.GetReports()
+            .subscribe(
             data => this.data = data,
-            err => this.logError(err),
+            error => this.errorMsg = <any>error,
             () => {
-                console.log(this.data);
-                for (var i = 0; this.data.length > i; i++) {
-                    console.log(this.data[i]);
-                    var currentObject: Object = this.data[i];
-                    for (let identifier in this.data[i]) {
-                        console.log(currentObject[identifier]);
-                    }
+                //console.log(this.test);
+                this.reportss.name = this.data.Name;
+                this.reportss.files = this.data.Files;
+                for (var i = 0; i < this.reportss.files.length; i++) {
+                    this.reportss.files[i] = this.reportss.files[i].replace(".smd", "");
                 }
-            }
-        );*/
+                if (this.data.Folders != " ") {
+                    
+                }
 
-        console.log(this.test);
+            }
+        );
+
+
+
+
+
+
+        /*console.log("Test: " + this.test);
+        console.log(this.reports);*/
     }
 
     ShowReport(report: string) {

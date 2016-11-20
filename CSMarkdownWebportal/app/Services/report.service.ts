@@ -19,7 +19,15 @@ export class ReportService {
     //Nicholai Axelgaard
     ShowReport() {
         //console.log(this.report);
-        return this.baseUrl + "render/" + this.report;
+        if (this.report != undefined)
+        {
+            return this.baseUrl + "render/" + this.report.replace(".smd", "");
+        }
+        else
+        {
+            return this.baseUrl + "render/" + this.report;
+        }
+        
     }
 
 
@@ -27,18 +35,6 @@ export class ReportService {
     GetReports() {
         return this.http.get(this.baseUrl + "getReports").map((res: Response) => res.json());
             
-
-        /*this.http.get(this.baseUrl + 'getReports')
-            .map(res => { return  res.json() })
-            .subscribe(
-            (data) => this.data = data,
-            (err) => this.logError(err),
-            () => console.log(this.data)
-            );*/
-
-        
-        //console.log(this.data);
-        //return this.data;
     }
 
     //Nicholai Axelgaard
