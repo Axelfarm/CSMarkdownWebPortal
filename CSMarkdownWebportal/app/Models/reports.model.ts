@@ -1,4 +1,5 @@
 ﻿// Mads
+import { ReportModel } from './report.model';
 export class ReportsModel {
     name: string;
     files: Array<string>;
@@ -8,46 +9,30 @@ export class ReportsModel {
 
     }
 
-    /*AddDirectory(name: string, files: Array<string>, folders: Array<Object>): ReportsModel {
-
-        var report = new ReportsModel();
-
-        report.name = name;
-
-        for (var i = 0; i < files.length; i++) {
-            files[i] = files[i].replace(".smd", "");
-        }
-
-        report.files = files;
-
-
-        for (var i = 0; i < folders.length; i++){
-
-            
-            
-        }
-
-        console.log(name);
-        console.log(files);
-        console.log(folders);
-
-        return report;
-    }*/
 
     AddDirectory(data: Object): ReportsModel{
-        var report = new ReportsModel();
+        var reports = new ReportsModel();
 
-        report.name = data["Name"];
-        report.files = data["Files"];
+        reports.name = data["Name"];
+
+
+        for (var file in data["Files"]) {
+            var report = new ReportModel();   
+
+            report.name = file.replace(".smd", "");
+            report.reportID = "" + file; //ToDo
+        }
+
+        reports.files = data["Files"];
 
         var folder = new Array<ReportsModel>();
         if (data["Folders"] != " ") {
             for (var parameter in data["Folders"]) {
-                folder.push(report.AddDirectory(data["Folders"][parameter]));
+                folder.push(reports.AddDirectory(data["Folders"][parameter]));
             }
-            report.folders = folder;
+            reports.folders = folder;
         }
 
-        return report;
+        return reports;
     }
 }
