@@ -26,7 +26,7 @@ export class ReportsComponent implements OnInit {
     ngOnInit() {
         this.GetReports();
         //console.log(this.reportService.data);
-        console.log(this.reportss);
+        //console.log(this.reportss);
     }
 
     GetReports() {
@@ -39,15 +39,29 @@ export class ReportsComponent implements OnInit {
             data => this.data = data,
             error => this.errorMsg = <any>error,
             () => {
+                this.reportss = this.reportss.AddDirectory(this.data);
+                console.log(this.reportss);
                 //console.log(this.test);
-                this.reportss.name = this.data.Name;
+                /*this.reportss.name = this.data.Name;
                 this.reportss.files = this.data.Files;
                 for (var i = 0; i < this.reportss.files.length; i++) {
                     this.reportss.files[i] = this.reportss.files[i].replace(".smd", "");
-                }
+                }*/
+                /*var folders = Array<Object>();
                 if (this.data.Folders != " ") {
-                    
-                }
+                    console.log("Hit 1");
+                    var report = new ReportsModel();
+                    for (var property in this.data.Folders) {
+                        report.name = this.data.Folders[property].Name;
+                        report.files = this.data.Folders[property].Files;
+                        for (var i = 0; i < report.files.length; i++) {
+                            report.files[i] = this.reportss.files[i].replace(".smd", "");
+                        }
+                        this.reportss.folders.push(report);
+                    }
+                }*/
+
+                //this.reportss = this.reportss.AddDirectory(this.data.Name, this.data.Files, folders);
 
             }
         );
