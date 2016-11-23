@@ -1,7 +1,7 @@
 ﻿<!--Mads Nørgaard-->
-<div style="border-top: 1px solid black">
+<div style="border-top: 1px solid black" ng->
     <ul>
-        <li *ngFor="let param of report.parameters" style="list-style:none; margin-top: 20px">
+        <li *ngFor="let param of this.report.parameters" style="list-style:none; margin-top: 20px">
 
             <div style="border-top:solid; border-top-width:thin">
                 <label style="float:left">
@@ -9,9 +9,9 @@
                 </label>
                 <ul style="list-style:none">
                     <li *ngFor="let value of param.Value" style="margin-top:5px">
-                        <div *ngFor="let val of SplitValueForMultipleInputFields(param.ParamType, value)" style="display:inline">
-                            <input type="{{val[0]}}" value="{{val[1]}}"/>
-                        </div>
+                        <span *ngFor="let val of SplitValueForMultipleInputFields(param.ParamType, value)" style="display:inline">
+                            <input type="{{val[0]}}" [value]="val[1]"/>
+                        </span>
                     </li>
                 </ul>
             </div>

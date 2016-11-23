@@ -11,7 +11,6 @@ import { ParameterModel } from './../Models/parameter.model';
 @Component({
     selector: 'parameters',
     templateUrl: 'app/Views/parameters.component.html',
-    providers: [ReportService],
     styleUrls: ['app/Styles/parameters.component.css']
 })
 export class ParametersComponent implements OnInit {
@@ -19,9 +18,9 @@ export class ParametersComponent implements OnInit {
     data: Array<Array<any>>;
     logError: any;
 
-
     report: ReportModel;
-    constructor(private reportService: ReportService, private http: Http) {
+
+    constructor(private reportService: ReportService, private http: Http, private reportModel: ReportModel) {
         this.GetParameters();
     }
 
@@ -31,18 +30,14 @@ export class ParametersComponent implements OnInit {
     // PT Is the report name hardcoded, but when it is made so that it sends the report to this component, then it will showhow
     // set this.report to the received report object.
     GetParameters(): void {
+        console.log(this.reportService.report);
         // These two lines of code are currently hardcoded, but in the future it needs to be replace by fx
         // a report object defined at an earlier stage.
-        this.report = new ReportModel();
-        this.report.name = 'markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to';
-        this.reportService.GetParameters(this.report).subscribe(
-            data => this.data = data,
-            err => this.logError(err),
-            () => {
-                for (var i = 0; this.data.length > i; i++) {
-                    this.report.AddParamert(this.data[i]);
-                }
-            }
+        this.report = this.reportService.reportModel;
+        this.reportService.GetParameters().subscribe(
+            data => { for (let each of data as Array<Object>) this.report.AddParameter(each); },
+            err => this.logError = err,
+            () => this.report
         );
         //console.log(this.report);
     }
@@ -57,5 +52,10 @@ export class ParametersComponent implements OnInit {
         else
             splitValues.push(["text", value.trim()]);
         return splitValues;
+    }
+
+    ShowReportInLog(err: any) {
+        this.GetParameters();
+        console.log(this.report);
     }
 }

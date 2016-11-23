@@ -15,7 +15,7 @@ export class ReportModel {
         return null;
     }
 
-    AddParamert(parameter: Object): void {
+    AddParameter(parameter: Object): void {
         var param = new ParameterModel();
         for (let identifier in parameter) {
             if (identifier.toLowerCase().includes("key"))

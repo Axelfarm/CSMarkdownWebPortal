@@ -10,7 +10,7 @@ import { ReportModel } from './../Models/report.model';
 export class ReportService {
     data: any;
     logError: any;
-    constructor(private http: Http) {
+    constructor(private http: Http, public reportModel: ReportModel) {
 
     }
 
@@ -20,6 +20,8 @@ export class ReportService {
 
     //Nicholai
     ShowReport() {
+        this.reportModel = new ReportModel;
+        this.reportModel.name = this.report;
         //console.log(this.report);
         return this.baseUrl + "render/" + this.report;  //+ report.name;
     }
@@ -42,9 +44,10 @@ export class ReportService {
     }
 
     //Nicholai Axelgaard
-    GetParameters(report: ReportModel) {
+    GetParameters() {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
-        return this.http.get(this.baseUrl + "params/" + report.name)
+        console.log("GetParamsRan");
+        return this.http.get(this.baseUrl + "params/" + this.reportModel.name)
             .map(res => res.json());
             
         //return this.data;
