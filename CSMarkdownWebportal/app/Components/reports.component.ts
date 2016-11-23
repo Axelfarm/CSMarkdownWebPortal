@@ -1,5 +1,6 @@
 ﻿//Mads Nørgaard
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 import { ReportService } from './../Services/report.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -75,6 +76,8 @@ export class ReportsComponent implements OnInit {
         this.reportService.reportName = reportName;
         //console.log(this.reportService.report);
     }
+
+
     
 
 
