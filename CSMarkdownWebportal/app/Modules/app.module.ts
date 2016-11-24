@@ -15,11 +15,14 @@ import { TestPipe } from './../Pipes/test.pipe';
 //Shared services
 import { ReportService } from './../Services/report.service';
 
+//Shared models
+import { ReportModel } from './../Models/report.model';
+
 
 @NgModule({
     imports: [BrowserModule, HttpModule],
     declarations: [AppComponent, ReportComponent, ReportsComponent, ParametersComponent, TestPipe],
-    providers: [ReportService],
+    providers: [ReportService, ReportModel],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

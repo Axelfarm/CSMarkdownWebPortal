@@ -20,13 +20,13 @@ export class ReportService {
 
     //Nicholai
     ShowReport() {
-        this.reportModel = new ReportModel;
-        this.reportModel.name = this.report;
+        //this.reportModel = new ReportModel;
+        //this.reportModel.name = this.report;
         //console.log(this.report);
-        return this.baseUrl + "render/" + this.report;  //+ report.name;
+        return this.baseUrl + "render/" + this.reportModel.reportID;  //+ report.name;
     }
     //Mads Nørgaard
-    GetReports(){
+    GetReports() {
         return this.http.get(this.baseUrl + "getReports");
             
 
@@ -46,8 +46,7 @@ export class ReportService {
     //Nicholai Axelgaard
     GetParameters() {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
-        console.log("GetParamsRan");
-        return this.http.get(this.baseUrl + "params/" + this.reportModel.name)
+        return this.http.get(this.baseUrl + "params/" + this.reportModel.reportID)
             .map(res => res.json());
             
         //return this.data;

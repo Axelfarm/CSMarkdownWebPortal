@@ -70,7 +70,7 @@ export class ReportsComponent implements OnInit {
 
     ShowReport(report: string) {
         //console.log(this.reportService.report);
-        this.reportService.report = report;
+        this.reportService.reportModel.reportID = report;
         //console.log(this.reportService.report);
     }
     
