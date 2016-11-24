@@ -16,12 +16,16 @@ export class ReportsModel {
         reports.name = data["Name"];
 
 
-        for (var file in data["Files"]) {
+        /*for (var i = 0; i < data["Files"]; i++) {
             var report = new ReportModel();   
 
-            report.name = file.replace(".smd", "");
-            report.reportID = "" + file; //ToDo
-        }
+            //console.log(file);
+            report.name = data["Files"][i].replace(".smd", "");
+            report.reportID = "" + data["Files"][i]; //ToDo
+
+            console.log(report);
+            reports.files.push(report);
+        }*/
 
         reports.files = data["Files"];
 

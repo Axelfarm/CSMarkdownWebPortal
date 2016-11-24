@@ -15,12 +15,17 @@ import { ReportsModel } from './../Models/reports.model';
 })
 export class ReportsComponent implements OnInit {
 
-    //reports: Observable<any>;
     data: any;
     errorMsg: any;
     reportss = new ReportsModel();
 
     constructor(private reportService: ReportService) {
+
+    }
+
+    nodes = [{id: 1,name: 'Documents',children: [{ id: 2, name: 'markdown_001' },{ id: 3, name: 'markdown_2_legends_1_type' }]},{id: 4,name: 'root2',children: [{ id: 5, name: 'child2.1' },{id: 6,name: 'child2.2',children: [{ id: 7, name: 'subsub' }]}]}];
+
+    CreateTree() {
 
     }
 
@@ -31,10 +36,6 @@ export class ReportsComponent implements OnInit {
     }
 
     GetReports() {
-        /*this.test = this.reportService.GetReports();
-        console.log(this.test);*/
-
-
         this.reportService.GetReports()
             .subscribe(
             data => this.data = data,
@@ -42,34 +43,48 @@ export class ReportsComponent implements OnInit {
             () => {
                 this.reportss = this.reportss.AddDirectory(this.data);
                 console.log(this.reportss);
-                //console.log(this.test);
-                /*this.reportss.name = this.data.Name;
-                this.reportss.files = this.data.Files;
-                for (var i = 0; i < this.reportss.files.length; i++) {
-                    this.reportss.files[i] = this.reportss.files[i].replace(".smd", "");
-                }*/
-                /*var folders = Array<Object>();
-                if (this.data.Folders != " ") {
-                    console.log("Hit 1");
-                    var report = new ReportsModel();
-                    for (var property in this.data.Folders) {
-                        report.name = this.data.Folders[property].Name;
-                        report.files = this.data.Folders[property].Files;
-                        for (var i = 0; i < report.files.length; i++) {
-                            report.files[i] = this.reportss.files[i].replace(".smd", "");
-                        }
-                        this.reportss.folders.push(report);
-                    }
-                }*/
-
-                //this.reportss = this.reportss.AddDirectory(this.data.Name, this.data.Files, folders);
-
+                //this.RenderDOM(this.CreateDOM(this.reportss, 0));
             }
         );
-
-        /*console.log("Test: " + this.test);
-        console.log(this.reports);*/
+        
     }
+
+    private CreateDOM(reports: ReportsModel, index: number): string {
+        var html: string;
+
+        html += "<ul><li><input type=\"checkbox\" id=\item-" + index + "\" /> <label for=\"item-" + index + "\">" + reports.name + "</label><ul>";
+
+        /*for (var i = 0; i < reports.folders.length; i++){
+            html += this.CreateDOM(reports.folders[i], index++);
+        }*/
+        
+        for (var i = 0; i < reports.files.length; i++)
+        {
+            html += "<li class=\"glyphicon glyphicon-file\" ><a (click)=\"ShowReport(" + reports.files[i].replace(".smd", "") + ")\">" + reports.files[i].replace(".smd", "") + "</a></li><br />";
+        }
+       
+        
+        html += "</ul></li></ul>";
+
+        return html;
+
+        /*<ul>
+            <li><input type="checkbox" id="item-0" /> <label for="item-0">{{reportss.name}}</label>
+                <ul *ngFor='let report of reportss.files'>
+                    <li class="glyphicon glyphicon-file" >
+                        <a (click)="ShowReport(report)">{{report}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>*/
+    }
+
+    private RenderDOM(html: string) {
+        var node = document.getElementById("tree");
+        node.innerHTML = html;
+    }
+
+    
 
     ShowReport(reportName: string) {
         //console.log(this.reportService.report);
