@@ -23,16 +23,98 @@ export class ReportsComponent implements OnInit {
 
     }
 
-    nodes = [{id: 1,name: 'Documents',children: [{ id: 2, name: 'markdown_001' },{ id: 3, name: 'markdown_2_legends_1_type' }]},{id: 4,name: 'root2',children: [{ id: 5, name: 'child2.1' },{id: 6,name: 'child2.2',children: [{ id: 7, name: 'subsub' }]}]}];
+    tree: any;
 
-    CreateTree() {
+    nodes =
+    [
+        {
+            id: 1, name: 'Documents',
+            children:
+            [{
+                id: 2, name: 'markdown_001'
+            },
+                {
+                    id: 3,
+                    name: 'markdown_2_legends_1_type'
+                }]
+        },
+        {
+            id: 4,
+            name: 'root2',
+            children:
+            [
+                {
+                    id: 5, name: 'child2.1'
+                },
+                {
+                    id: 6,
+                    name: 'child2.2',
+                    children:
+                    [{ id: 7, name: 'subsub' }]
+                }]
+        }];
 
+
+    CreateTree(reports: ReportsModel) {
+        var tree = new Array();
+        //var child = new Array();
+        //var childchild = new Array();
+
+        /*childchild.push({
+            'name': 'tester'
+        });*/
+
+        /*for (var file in reports.files) {
+            child.push({
+                'name': file
+            });
+        }
+
+        for (var i = 0; i < reports.folders.length; i++) {
+            child.push({
+                'name': reports.folders[i].name,
+                'children': this.CreateTree(reports.folders[i])
+            });
+        }*/
+
+        tree.push({
+            'name': reports.name,
+            'children': this.CreateNode(reports)
+        });
+
+        return tree;
     }
 
     ngOnInit() {
         this.GetReports();
+        //console.log(this.reportss);
+        //console.log(this.tree);
         //console.log(this.reportService.data);
         //console.log(this.reportss);
+    }
+
+    Update() {
+        console.log(this.tree);
+        console.log(this.nodes);
+    }
+
+    CreateNode(reports: ReportsModel) {
+        var node = new Array();
+
+        for (var i = 0; i < reports.files.length; i++) {
+            node.push({
+                'name': reports.files[i]
+            });
+        }
+
+        for (var i = 0; i < reports.folders.length; i++) {
+            node.push({
+                'name': reports.folders[i].name,
+                'children': this.CreateNode(reports.folders[i])
+            });
+        }
+
+        return node;
     }
 
     GetReports() {
@@ -44,6 +126,8 @@ export class ReportsComponent implements OnInit {
                 this.reportss = this.reportss.AddDirectory(this.data);
                 console.log(this.reportss);
                 //this.RenderDOM(this.CreateDOM(this.reportss, 0));
+                this.tree = this.CreateTree(this.reportss);
+                //return this.reportss;
             }
         );
         
