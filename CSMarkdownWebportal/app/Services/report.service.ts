@@ -10,7 +10,7 @@ import { ReportModel } from './../Models/report.model';
 export class ReportService {
     
     reportName: string;
-    report = new ReportModel();
+    reportModel = new ReportModel();
     private baseUrl = "http://localhost/csmarkdown/";
     constructor(private http: Http) {
 
@@ -28,10 +28,10 @@ export class ReportService {
             return this.baseUrl + "render/" + this.reportName;
         }*/
 
-        if (this.report.reportID != null || this.report.reportID != "" || this.report.reportID != undefined)
-            return this.baseUrl + "render/" + this.report.name + "?path=" + this.report.reportID;
+        if (this.reportModel.reportID != null || this.reportModel.reportID != "" || this.reportModel.reportID != undefined)
+            return this.baseUrl + "render/" + this.reportModel.name + "?path=" + this.reportModel.reportID;
         else
-            return this.baseUrl + "render/" + this.report.name;
+            return this.baseUrl + "render/" + this.reportModel.name;
     }
 
 

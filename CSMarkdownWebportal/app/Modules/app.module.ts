@@ -2,6 +2,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { routing, appRoutingProviders } from '../app.routing';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common'; 
 
 //Shared components
 import { AppComponent } from './../Components/app.component';

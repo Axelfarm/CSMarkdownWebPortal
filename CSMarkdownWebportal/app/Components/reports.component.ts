@@ -78,13 +78,10 @@ export class ReportsComponent implements OnInit {
 
     ShowReport(reportName: string, reportPath: string) {
         //this.reportService.reportName = reportName;
-        this.reportService.report.name = reportName;
-        this.reportService.report.reportID = reportPath;
+        this.reportService.reportModel.name = reportName;
+        this.reportService.reportModel.reportID = reportPath;
     }
 
-    Update() {
-        console.log(this.tree);
-    }
 
     //Not in use
     private CreateDOM(reports: ReportsModel, index: number): string {
