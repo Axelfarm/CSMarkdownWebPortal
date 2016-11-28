@@ -18,99 +18,43 @@ export class ReportsComponent implements OnInit {
     data: any;
     errorMsg: any;
     reportss = new ReportsModel();
+    tree: any; //JSON Array
 
     constructor(private reportService: ReportService) {
 
     }
-
-    tree: any;
-
-    nodes =
-    [
-        {
-            id: 1, name: 'Documents',
-            children:
-            [{
-                id: 2, name: 'markdown_001'
-            },
-                {
-                    id: 3,
-                    name: 'markdown_2_legends_1_type'
-                }]
-        },
-        {
-            id: 4,
-            name: 'root2',
-            children:
-            [
-                {
-                    id: 5, name: 'child2.1'
-                },
-                {
-                    id: 6,
-                    name: 'child2.2',
-                    children:
-                    [{ id: 7, name: 'subsub' }]
-                }]
-        }];
+    
+    ngOnInit() {
+        this.GetReports();
+    }
 
 
     CreateTree(reports: ReportsModel) {
         var tree = new Array();
-        //var child = new Array();
-        //var childchild = new Array();
-
-        /*childchild.push({
-            'name': 'tester'
-        });*/
-
-        /*for (var file in reports.files) {
-            child.push({
-                'name': file
-            });
-        }
-
-        for (var i = 0; i < reports.folders.length; i++) {
-            child.push({
-                'name': reports.folders[i].name,
-                'children': this.CreateTree(reports.folders[i])
-            });
-        }*/
 
         tree.push({
             'name': reports.name,
-            'children': this.CreateNode(reports)
+            'children': this.CreateNode(reports, "")
         });
 
         return tree;
     }
 
-    ngOnInit() {
-        this.GetReports();
-        //console.log(this.reportss);
-        //console.log(this.tree);
-        //console.log(this.reportService.data);
-        //console.log(this.reportss);
-    }
 
-    Update() {
-        console.log(this.tree);
-        console.log(this.nodes);
-    }
-
-    CreateNode(reports: ReportsModel) {
+    CreateNode(reports: ReportsModel, path: string) {
         var node = new Array();
-
-        for (var i = 0; i < reports.files.length; i++) {
-            node.push({
-                'name': reports.files[i]
-            });
-        }
 
         for (var i = 0; i < reports.folders.length; i++) {
             node.push({
                 'name': reports.folders[i].name,
-                'children': this.CreateNode(reports.folders[i])
+                'children': this.CreateNode(reports.folders[i], path + reports.folders[i].name + "\\")
+            });
+        }
+
+        for (var i = 0; i < reports.files.length; i++) {
+            node.push({
+                'name': reports.files[i].replace(".smd", ""),
+                'path': path
             });
         }
 
@@ -127,12 +71,22 @@ export class ReportsComponent implements OnInit {
                 console.log(this.reportss);
                 //this.RenderDOM(this.CreateDOM(this.reportss, 0));
                 this.tree = this.CreateTree(this.reportss);
-                //return this.reportss;
             }
         );
         
     }
 
+    ShowReport(reportName: string, reportPath: string) {
+        //this.reportService.reportName = reportName;
+        this.reportService.report.name = reportName;
+        this.reportService.report.reportID = reportPath;
+    }
+
+    Update() {
+        console.log(this.tree);
+    }
+
+    //Not in use
     private CreateDOM(reports: ReportsModel, index: number): string {
         var html: string;
 
@@ -163,21 +117,9 @@ export class ReportsComponent implements OnInit {
         </ul>*/
     }
 
+    //Not in use
     private RenderDOM(html: string) {
         var node = document.getElementById("tree");
         node.innerHTML = html;
     }
-
-    
-
-    ShowReport(reportName: string) {
-        //console.log(this.reportService.report);
-        this.reportService.reportName = reportName;
-        //console.log(this.reportService.report);
-    }
-
-
-    
-
-
 }

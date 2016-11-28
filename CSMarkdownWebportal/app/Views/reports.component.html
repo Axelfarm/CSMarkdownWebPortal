@@ -9,6 +9,9 @@
 
 <Tree [nodes]="tree">
     <template #treeNodeTemplate let-node>
-        <a (click)="ShowReport(node.data.name)">{{ node.data.name }}</a>
+        <a (click)="ShowReport(node.data.name, node.data.path)">{{ node.data.name }}</a>
     </template>
 </Tree>
+
+<br />
+<button (click)="Update()">Refresh</button>

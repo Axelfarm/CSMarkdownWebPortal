@@ -10,6 +10,7 @@ import { ReportModel } from './../Models/report.model';
 export class ReportService {
     
     reportName: string;
+    report = new ReportModel();
     private baseUrl = "http://localhost/csmarkdown/";
     constructor(private http: Http) {
 
@@ -18,21 +19,25 @@ export class ReportService {
     //Nicholai Axelgaard
     ShowReport(): string {
         //console.log(this.report);
-        if (this.reportName != undefined)
+        /*if (this.reportName != undefined)
         {
             return this.baseUrl + "render/" + this.reportName.replace(".smd", "");
         }
         else
         {
             return this.baseUrl + "render/" + this.reportName;
-        }
-        
+        }*/
+
+        if (this.report.reportID != null || this.report.reportID != "" || this.report.reportID != undefined)
+            return this.baseUrl + "render/" + this.report.name + "?path=" + this.report.reportID;
+        else
+            return this.baseUrl + "render/" + this.report.name;
     }
 
 
     //Mads Nørgaard
     GetReports(): Observable<any> {
-        return this.http.get(this.baseUrl + "getReports").map((res: Response) => res.json());
+        return this.http.get(this.baseUrl + "getReports", ).map((res: Response) => res.json());
             
     }
 
