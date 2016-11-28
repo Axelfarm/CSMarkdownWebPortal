@@ -8,41 +8,41 @@ import { ReportModel } from './../Models/report.model';
 
 @Injectable()
 export class ReportService {
-    data: any;
-    logError: any;
+    
+    reportName: string;
+    report = new ReportModel();
+    private baseUrl = "http://localhost/csmarkdown/";
     constructor(private http: Http) {
 
     }
 
-    report: string;
-    private baseUrl = "http://localhost/csmarkdown/";
-
-
-    //Nicholai
-    ShowReport() {
+    //Nicholai Axelgaard
+    ShowReport(): string {
         //console.log(this.report);
-        return this.baseUrl + "render/" + this.report;  //+ report.name;
+        /*if (this.reportName != undefined)
+        {
+            return this.baseUrl + "render/" + this.reportName.replace(".smd", "");
+        }
+        else
+        {
+            return this.baseUrl + "render/" + this.reportName;
+        }*/
+
+        if (this.report.reportID != null || this.report.reportID != "" || this.report.reportID != undefined)
+            return this.baseUrl + "render/" + this.report.name + "?path=" + this.report.reportID;
+        else
+            return this.baseUrl + "render/" + this.report.name;
     }
+
+
     //Mads Nørgaard
-    GetReports(){
-        return this.http.get(this.baseUrl + "getReports");
+    GetReports(): Observable<any> {
+        return this.http.get(this.baseUrl + "getReports", ).map((res: Response) => res.json());
             
-
-        /*this.http.get(this.baseUrl + 'getReports')
-            .map(res => { return  res.json() })
-            .subscribe(
-            (data) => this.data = data,
-            (err) => this.logError(err),
-            () => console.log(this.data)
-            );*/
-
-        
-        //console.log(this.data);
-        //return this.data;
     }
 
     //Nicholai Axelgaard
-    GetParameters(report: ReportModel) {
+    GetParameters(report: ReportModel): Observable<any> {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
         return this.http.get(this.baseUrl + "params/" + report.name)
             .map(res => res.json());
@@ -50,9 +50,6 @@ export class ReportService {
         //return this.data;
     }
 
-    private handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
-    }
+    
     
 }

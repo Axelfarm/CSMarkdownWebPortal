@@ -105,6 +105,7 @@
     <Content Include="js\responsive-tables.js" />
     <Content Include="packages.config" />
     <Content Include="package.json" />
+    <Content Include="systemjs.config.js" />
     <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -130,6 +131,7 @@
     <TypeScriptCompile Include="app\Components\reports.component.ts" />
     <TypeScriptCompile Include="app\Models\parameter.model.ts" />
     <TypeScriptCompile Include="app\Models\report.model.ts" />
+    <TypeScriptCompile Include="app\Models\reports.model.ts" />
     <TypeScriptCompile Include="app\Pipes\test.pipe.ts" />
     <TypeScriptCompile Include="app\Services\report.service.ts" />
     <TypeScriptCompile Include="app\Tests\app.component.spec.ts" />

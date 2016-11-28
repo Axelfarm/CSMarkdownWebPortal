@@ -1,9 +1,11 @@
 ﻿//Mads Nørgaard
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 import { ReportService } from './../Services/report.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
-
+import { ReportsModel } from './../Models/reports.model';
 
 
 @Component({
@@ -13,67 +15,111 @@ import 'rxjs/Rx';
 })
 export class ReportsComponent implements OnInit {
 
-    reports = ["markdown_001",
-        "markdown_002",
-        "markdown_2_legends",
-        "markdown_2_legends_1_type",
-        "markdown_2_legends_2_types",
-        "markdown_2_legends_2_types_4_different_date_formats",
-        "markdown_3_legends_with_array_of_dates_readTags",
-        "markdown_5_legends_using_readTags",
-        "markdown_custom_dateformat",
-        "markdown_display_error",
-        "markdown_display_message",
-        "markdown_display_warning",
-        "markdown_error_display",
-        "markdown_error_throw",
-        "markdown_failure",
-        "markdown_inline_code",
-        "markdown_legend",
-        "markdown_min_and_max_values",
-        "markdown_min_value",
-        "markdown_multiple_value_without_legends",
-        "markdown_multiple_value_with_legends_defined",
-        "markdown_no_legends",
-        "markdown_null_data",
-        "markdown_parameters",
-        "markdown_pie_and_donut_chart",
-        "markdown_read_excel_csv",
-        "markdown_renderChart_yaml_multiple_tags_x_date_params_from_and_to",
-        "markdown_render_10_charts",
-        "markdown_syntax_test",
-        "markdown_table",
-        "markdown_table_with_options",
-    ];
-
-    test: any;
+    data: any;
+    errorMsg: any;
+    reportss = new ReportsModel();
+    tree: any; //JSON Array
 
     constructor(private reportService: ReportService) {
 
     }
-
+    
     ngOnInit() {
         this.GetReports();
-        console.log(this.reportService.data);
+    }
+
+
+    CreateTree(reports: ReportsModel) {
+        var tree = new Array();
+
+        tree.push({
+            'name': reports.name,
+            'children': this.CreateNode(reports, "")
+        });
+
+        return tree;
+    }
+
+
+    CreateNode(reports: ReportsModel, path: string) {
+        var node = new Array();
+
+        for (var i = 0; i < reports.folders.length; i++) {
+            node.push({
+                'name': reports.folders[i].name,
+                'children': this.CreateNode(reports.folders[i], path + reports.folders[i].name + "\\")
+            });
+        }
+
+        for (var i = 0; i < reports.files.length; i++) {
+            node.push({
+                'name': reports.files[i].replace(".smd", ""),
+                'path': path
+            });
+        }
+
+        return node;
     }
 
     GetReports() {
-        /*this.test = this.reportService.GetReports();
-        console.log(this.test);*/
-
         this.reportService.GetReports()
-            .map(res => res.json())
-            .subscribe(data => this.test = data);
-
-        console.log(this.test);
+            .subscribe(
+            data => this.data = data,
+            error => this.errorMsg = <any>error,
+            () => {
+                this.reportss = this.reportss.AddDirectory(this.data);
+                console.log(this.reportss);
+                //this.RenderDOM(this.CreateDOM(this.reportss, 0));
+                this.tree = this.CreateTree(this.reportss);
+            }
+        );
+        
     }
 
-    ShowReport(report: string) {
-        //console.log(this.reportService.report);
-        this.reportService.report = report;
-        //console.log(this.reportService.report);
+    ShowReport(reportName: string, reportPath: string) {
+        //this.reportService.reportName = reportName;
+        this.reportService.report.name = reportName;
+        this.reportService.report.reportID = reportPath;
     }
-    
 
+    Update() {
+        console.log(this.tree);
+    }
 
+    //Not in use
+    private CreateDOM(reports: ReportsModel, index: number): string {
+        var html: string;
+
+        html += "<ul><li><input type=\"checkbox\" id=\item-" + index + "\" /> <label for=\"item-" + index + "\">" + reports.name + "</label><ul>";
+
+        /*for (var i = 0; i < reports.folders.length; i++){
+            html += this.CreateDOM(reports.folders[i], index++);
+        }*/
+        
+        for (var i = 0; i < reports.files.length; i++)
+        {
+            html += "<li class=\"glyphicon glyphicon-file\" ><a (click)=\"ShowReport(" + reports.files[i].replace(".smd", "") + ")\">" + reports.files[i].replace(".smd", "") + "</a></li><br />";
+        }
+       
+        
+        html += "</ul></li></ul>";
+
+        return html;
+
+        /*<ul>
+            <li><input type="checkbox" id="item-0" /> <label for="item-0">{{reportss.name}}</label>
+                <ul *ngFor='let report of reportss.files'>
+                    <li class="glyphicon glyphicon-file" >
+                        <a (click)="ShowReport(report)">{{report}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>*/
+    }
+
+    //Not in use
+    private RenderDOM(html: string) {
+        var node = document.getElementById("tree");
+        node.innerHTML = html;
+    }
 }
