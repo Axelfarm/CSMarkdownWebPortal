@@ -15,7 +15,7 @@ export class ReportModel {
         return null;
     }
 
-    AddParamert(parameter: Object): void {
+    AddParameter(parameter: Object): void {
         var param = new ParameterModel();
         for (let identifier in parameter) {
             if (identifier.toLowerCase().includes("key"))
@@ -34,6 +34,11 @@ export class ReportModel {
         // Var der enighed om, at man ikke skal kunne skrive 5-4 for at få 1, når det gjaldt datoer?????
 
         if (param.ParamType.toLowerCase().includes("date")) {
+            // Underneath it sets it to datetime-local, because if it is onlt "date", it will not show time.
+            // However, since the parameters.component is using two input fields, one for date and one for time,
+            // this currently doesn't have any effect. But in case it is decided to use one combined input
+            // field for both date and time, then this makes sure that both definers are available.
+            param.ParamType = "datetime-local";
             var date: Date = new Date();
             var emptyDate: Date = new Date(1970, 1, 1, 0, 0, 0);
 

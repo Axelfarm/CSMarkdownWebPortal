@@ -42,9 +42,9 @@ export class ReportService {
     }
 
     //Nicholai Axelgaard
-    GetParameters(report: ReportModel): Observable<any> {
+    GetParameters() {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
-        return this.http.get(this.baseUrl + "params/" + report.name)
+        return this.http.get(this.baseUrl + "params/" + this.reportModel.reportID)
             .map(res => res.json());
             
         //return this.data;
