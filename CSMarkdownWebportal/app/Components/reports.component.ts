@@ -44,6 +44,7 @@ export class ReportsComponent implements OnInit {
     CreateNode(reports: ReportsModel, path: string) {
         var node = new Array();
 
+        //Load in subdirectories 
         for (var i = 0; i < reports.folders.length; i++) {
             node.push({
                 'name': reports.folders[i].name,
@@ -51,10 +52,11 @@ export class ReportsComponent implements OnInit {
             });
         }
 
+        //Load in smd files
         for (var i = 0; i < reports.files.length; i++) {
             node.push({
                 'name': reports.files[i].replace(".smd", ""),
-                'path': path + reports.files[i].replace(".smd", "")
+                'path': path
             });
         }
 
@@ -68,7 +70,7 @@ export class ReportsComponent implements OnInit {
             error => this.errorMsg = <any>error,
             () => {
                 this.reportss = this.reportss.AddDirectory(this.data);
-                console.log(this.reportss);
+                //console.log(this.reportss);
                 //this.RenderDOM(this.CreateDOM(this.reportss, 0));
                 this.tree = this.CreateTree(this.reportss);
             }

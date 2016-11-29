@@ -125,14 +125,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\app.routing.ts" />
     <TypeScriptCompile Include="app\Components\parameters.component.ts" />
     <TypeScriptCompile Include="app\Components\report.component.ts" />
     <TypeScriptCompile Include="app\Components\reports.component.ts" />
     <TypeScriptCompile Include="app\Models\parameter.model.ts" />
     <TypeScriptCompile Include="app\Models\report.model.ts" />
     <TypeScriptCompile Include="app\Models\reports.model.ts" />
-    <TypeScriptCompile Include="app\Pipes\test.pipe.ts" />
     <TypeScriptCompile Include="app\Services\report.service.ts" />
     <TypeScriptCompile Include="app\Tests\app.component.spec.ts" />
     <TypeScriptCompile Include="app\Components\app.component.ts" />
