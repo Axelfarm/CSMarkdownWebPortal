@@ -23,15 +23,16 @@ export class ReportComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             if (params['reportName']) {
-                /*this.reportService.reportModel.name =*/ console.log(params['reportName']);
+                this.reportService.reportModel.name = params['reportName'];
             }
         });
+        this.ShowReport();
     }
 
 
     
     ShowReport() {
-        //console.log(this.reportService.report);
+        console.log(this.reportService.reportModel.name);
         return this.sanitizer.bypassSecurityTrustResourceUrl(this.reportService.ShowReport());
         
     }

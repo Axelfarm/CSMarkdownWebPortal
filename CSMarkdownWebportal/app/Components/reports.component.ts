@@ -54,7 +54,7 @@ export class ReportsComponent implements OnInit {
         for (var i = 0; i < reports.files.length; i++) {
             node.push({
                 'name': reports.files[i].replace(".smd", ""),
-                'path': path
+                'path': path + reports.files[i].replace(".smd", "")
             });
         }
 
@@ -103,6 +103,7 @@ export class ReportsComponent implements OnInit {
 
         return html;
 
+        //Template
         /*<ul>
             <li><input type="checkbox" id="item-0" /> <label for="item-0">{{reportss.name}}</label>
                 <ul *ngFor='let report of reportss.files'>

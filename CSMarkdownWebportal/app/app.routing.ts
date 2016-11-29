@@ -7,7 +7,7 @@ import { AppComponent } from './Components/app.component';
 
 const appRoutes: Routes = [
     { path: 'render/:reportName', component: AppComponent },
-
+    { path: '', component: AppComponent }
 ];
 
 export const appRoutingProviders: any[] = [

@@ -28,7 +28,7 @@ export class ReportService {
             return this.baseUrl + "render/" + this.reportName;
         }*/
 
-        if (this.reportModel.reportID != null || this.reportModel.reportID != "" || this.reportModel.reportID != undefined)
+        if (this.reportModel.reportID != null && this.reportModel.reportID != "" && this.reportModel.reportID != undefined)
             return this.baseUrl + "render/" + this.reportModel.name + "?path=" + this.reportModel.reportID;
         else
             return this.baseUrl + "render/" + this.reportModel.name;

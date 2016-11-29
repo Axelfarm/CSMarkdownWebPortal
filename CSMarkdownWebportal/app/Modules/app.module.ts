@@ -23,9 +23,9 @@ import { ReportModel } from './../Models/report.model';
 
 
 @NgModule({
-    imports: [BrowserModule, HttpModule, TreeModule],
+    imports: [BrowserModule, HttpModule, TreeModule, routing],
     declarations: [AppComponent, ReportComponent, ReportsComponent, ParametersComponent, TestPipe],
-    providers: [ReportService, ReportModel],
+    providers: [ReportService, ReportModel, { provide: LocationStrategy, useClass: HashLocationStrategy }],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
