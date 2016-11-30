@@ -4,9 +4,9 @@
         <label>Parametre</label>
     </div>
     <div class="ui-toolbar-group-right">
-        <button pButton type="button" icon="fa fa-eye"></button>
-        <button pButton type="button" icon="fa fa-refresh"></button>
-        <button pButton type="button" icon="fa fa-bug"></button>
+        <button pButton type="button" (click)="ShowReportInLog($event)" icon="fa fa-eye"></button>
+        <button pButton type="button" (click)="RefreshReport()" icon="fa fa-refresh"></button>
+        <button pButton type="button" (click)="ShowReportInLog2($event)" icon="fa fa-bug"></button>
     </div>
 </p-toolbar>
 <div style="border-top: 1px solid black">
