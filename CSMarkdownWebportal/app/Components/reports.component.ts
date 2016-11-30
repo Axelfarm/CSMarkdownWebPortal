@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { ReportsModel } from './../Models/reports.model';
 
-
 @Component({
     selector: 'reports',
     templateUrl: 'app/Views/reports.component.html',
@@ -33,7 +32,9 @@ export class ReportsComponent implements OnInit {
         var tree = new Array();
 
         tree.push({
-            'name': reports.name,
+            'label': reports.name,
+            "expandedIcon": "fa-folder-open",
+            "collapsedIcon": "fa-folder",
             'children': this.CreateNode(reports, "")
         });
 
@@ -47,7 +48,9 @@ export class ReportsComponent implements OnInit {
         //Load in subdirectories 
         for (var i = 0; i < reports.folders.length; i++) {
             node.push({
-                'name': reports.folders[i].name,
+                'label': reports.folders[i].name,
+                "expandedIcon": "fa-folder-open",
+                "collapsedIcon": "fa-folder",
                 'children': this.CreateNode(reports.folders[i], path + reports.folders[i].name + "\\")
             });
         }
@@ -55,7 +58,8 @@ export class ReportsComponent implements OnInit {
         //Load in smd files
         for (var i = 0; i < reports.files.length; i++) {
             node.push({
-                'name': reports.files[i].replace(".smd", ""),
+                'label': reports.files[i].replace(".smd", ""),
+                "icon": "fa-file",
                 'path': path
             });
         }
@@ -76,6 +80,13 @@ export class ReportsComponent implements OnInit {
             }
         );
         
+    }
+
+    nodeSelect(event: any) {
+        //event.node = selected node
+
+        this.reportService.reportModel.name = event.node.label;
+        this.reportService.reportModel.reportID = event.node.path;
     }
 
     ShowReport(reportName: string, reportPath: string) {

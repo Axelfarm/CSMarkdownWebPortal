@@ -50,6 +50,9 @@ export class ReportService {
         //return this.data;
     }
 
+    GetPdf() {
+        return this.http.get(this.baseUrl + "render/" + this.reportModel.name + "?pdf=true&path=" + this.reportModel.reportID);
+    }
     
     
 }
