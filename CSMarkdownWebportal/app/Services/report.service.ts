@@ -9,7 +9,7 @@ import { ReportModel } from './../Models/report.model';
 @Injectable()
 export class ReportService {
     
-    reportName: string;
+    //reportName: string;
     reportModel = new ReportModel();
     private baseUrl = "http://localhost/csmarkdown/";
     constructor(private http: Http) {
@@ -50,8 +50,16 @@ export class ReportService {
         //return this.data;
     }
 
-    GetPdf() {
-        return this.http.get(this.baseUrl + "render/" + this.reportModel.name + "?pdf=true&path=" + this.reportModel.reportID);
+    //Mads Nørgaard
+    GetPdf(): Observable<any> {
+        var url = this.baseUrl + "render/" + this.reportModel.name + "?pdf=true";
+
+        if (this.reportModel.reportID != "") {
+            url += "&path=" + this.reportModel.reportID;
+        }
+
+        return this.http.get(url);
+        
     }
     
     

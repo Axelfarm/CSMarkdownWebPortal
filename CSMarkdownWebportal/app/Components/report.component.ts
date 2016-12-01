@@ -1,10 +1,14 @@
 ﻿//Nicholai
 import { Component} from '@angular/core';
-import { ReportService } from './../Services/report.service';
+import { Response } from '@angular/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
+import { ReportService } from './../Services/report.service';
 //import { Router } from '@angular/router';
+var FileSaver = require('file-saver');
+
+
 
 @Component({
     selector: 'report-window',
@@ -28,7 +32,14 @@ export class ReportComponent {
     }
 
     GetPdf() {
-        this.reportService.GetPdf();
+        this.reportService.GetPdf().subscribe(data => this.downloadFile(data));
+    }
+
+    private downloadFile(data: Response) {
+        console.log("hit");
+        var blob = new Blob([data], { type: 'application/pdf' });
+        FileSaver.saveAs(blob, this.reportService.reportModel.name + ".pdf");
+        //var url = window.URL.createObjectURL(blob);
     }
     
     ShowReport() {

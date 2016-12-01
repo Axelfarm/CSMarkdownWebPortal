@@ -1,6 +1,15 @@
 ﻿<!--Mads Nørgaard-->
 <!--<div class="container">
     <div class="css-treeview" id="tree"> <!--http://codepen.io/tystrong/pen/cmxaJ
+    <ul>
+            <li><input type="checkbox" id="item-0" /> <label for="item-0">{{reports.name}}</label>
+                <ul *ngFor='let report of reports.files'>
+                    <li class="glyphicon glyphicon-file" >
+                        <a (click)="ShowReport(report)">{{report}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div> 
 <button (click)="GetReports()">Refresh</button>-->
