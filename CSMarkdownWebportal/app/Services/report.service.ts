@@ -18,7 +18,6 @@ export class ReportService {
     report: string;
     
     //reportName: string;
-    reportModel = new ReportModel();
     private baseUrl = "http://localhost/csmarkdown/";
 
 
