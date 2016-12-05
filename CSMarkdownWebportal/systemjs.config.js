@@ -27,8 +27,10 @@
       // other libraries
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'angular2-tree-component': 'node_modules/angular2-tree-component',
-      'lodash': 'node_modules/lodash'
+      'angular2-tree-component':   'node_modules/angular2-tree-component',
+      'lodash':                    'node_modules/lodash',
+      'primeng':                   'npm:primeng',
+      'file-saver':                'node_modules/file-saver/FileSaver.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -46,7 +48,11 @@
       'lodash': {
           main: 'lodash.js',
           defaultExtension: 'js'
+      },
+      primeng: {
+          defaultExtension: 'js'
       }
+      
     }
   });
 })(this);

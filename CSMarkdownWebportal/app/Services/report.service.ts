@@ -16,6 +16,9 @@ export class ReportService {
 
     params: string;
     report: string;
+    
+    //reportName: string;
+    reportModel = new ReportModel();
     private baseUrl = "http://localhost/csmarkdown/";
 
 
@@ -78,6 +81,17 @@ export class ReportService {
         //return this.data;
     }
 
+    //Mads Nørgaard
+    GetPdf(): Observable<any> {
+        var url = this.baseUrl + "render/" + this.reportModel.name + "?pdf=true";
+
+        if (this.reportModel.reportID != "") {
+            url += "&path=" + this.reportModel.reportID;
+        }
+
+        return this.http.get(url);
+        
+    }
     
     
 }
