@@ -57,7 +57,15 @@ export class ReportService {
             }
             //console.log(this.params);
             //console.log(this.baseUrl + "render/" + this.reportModel.reportID + "?" + this.params);
-            return this.baseUrl + "render/" + this.reportModel.name + "?" + this.params;
+            if (this.reportModel.reportID != undefined && this.reportModel.reportID.length > 0) {
+                return this.baseUrl + "render/" + this.reportModel.name + "?" + this.params + "&path=" + this.reportModel.reportID;
+            }
+            else {
+                return this.baseUrl + "render/" + this.reportModel.name + "?" + this.params;
+            }
+        }
+        if (this.reportModel.reportID != undefined && this.reportModel.reportID.length > 0) {
+            return this.baseUrl + "render/" + this.reportModel.name + "?path=" + this.reportModel.reportID;
         }
         else
             return this.baseUrl + "render/" + this.reportModel.name;  //+ report.name;
