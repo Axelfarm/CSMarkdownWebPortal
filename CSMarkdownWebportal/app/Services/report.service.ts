@@ -19,10 +19,8 @@ export class ReportService {
     private baseUrl = "http://localhost/csmarkdown/";
 
 
-    //Nicholai
-    ShowReport() {
-        //this.reportModel = new ReportModel;
-        //this.reportModel.name = this.report;
+    //Nicholai Axelgaard
+    ShowReport(): string {
         //console.log(this.report);
         this.params = "";
         //console.log("outside");
@@ -67,17 +65,11 @@ export class ReportService {
         return this.http.get(this.baseUrl + "getReports");
 
 
-        /*this.http.get(this.baseUrl + 'getReports')
-            .map(res => { return  res.json() })
-            .subscribe(
-            (data) => this.data = data,
-            (err) => this.logError(err),
-            () => console.log(this.data)
-            );*/
 
-
-        //console.log(this.data);
-        //return this.data;
+    //Mads Nørgaard
+    GetReports(): Observable<any> {
+        return this.http.get(this.baseUrl + "getReports", ).map((res: Response) => res.json());
+            
     }
 
     //Nicholai Axelgaard
@@ -89,9 +81,6 @@ export class ReportService {
         //return this.data;
     }
 
-    private handleError(error: Response) {
-        console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
-    }
-
+    
+    
 }
