@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Component } from '@angular/core';
 import { Http, Response } from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -14,6 +14,7 @@ export class ReportService {
 
     }
 
+    params: string;
     report: string;
     private baseUrl = "http://localhost/csmarkdown/";
 
@@ -23,12 +24,48 @@ export class ReportService {
         //this.reportModel = new ReportModel;
         //this.reportModel.name = this.report;
         //console.log(this.report);
-        return this.baseUrl + "render/" + this.reportModel.reportID;  //+ report.name;
+        this.params = "";
+        //console.log("outside");
+        if (this.reportModel.parameters != undefined && this.reportModel.parameters.length > 0) {
+            //console.log("inside");
+            for (var p: number = 0; this.reportModel.parameters.length > p; p++) {
+                if (p > 0)
+                    this.params += "&" + this.reportModel.parameters[p].Key + "=";
+
+                else
+                    this.params += this.reportModel.parameters[p].Key + "=";
+                for (var v: number = 0; this.reportModel.parameters[p].Value.length > v; v++) {
+                    if (this.reportModel.parameters[p].Value[v].trim() != "") {
+
+                        if (this.reportModel.parameters[p].ParamType.toLowerCase().includes("date")) {
+                            if (v > 0)
+                                this.params += "," + this.reportModel.parameters[p].Value[v].replace("T", ".");
+                            else
+                                this.params += this.reportModel.parameters[p].Value[v].replace("T", ".");
+                        }
+                        else {
+                            if (v > 0)
+                                this.params += "," + this.reportModel.parameters[p].Value[v];
+                            else
+                                this.params += this.reportModel.parameters[p].Value[v];
+                        }
+                    }
+                    // else if (this.reportModel.parameters[p].Value[v].trim() == "") {
+                    //    this.reportModel.parameters[p].Value.splice(v, 1);
+                    // }
+                }
+            }
+            //console.log(this.params);
+            //console.log(this.baseUrl + "render/" + this.reportModel.reportID + "?" + this.params);
+            return this.baseUrl + "render/" + this.reportModel.reportID + "?" + this.params;
+        }
+        else
+            return this.baseUrl + "render/" + this.reportModel.reportID;  //+ report.name;
     }
     //Mads Nørgaard
     GetReports() {
         return this.http.get(this.baseUrl + "getReports");
-            
+
 
         /*this.http.get(this.baseUrl + 'getReports')
             .map(res => { return  res.json() })
@@ -38,7 +75,7 @@ export class ReportService {
             () => console.log(this.data)
             );*/
 
-        
+
         //console.log(this.data);
         //return this.data;
     }
@@ -48,7 +85,7 @@ export class ReportService {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
         return this.http.get(this.baseUrl + "params/" + this.reportModel.reportID)
             .map(res => res.json());
-            
+
         //return this.data;
     }
 
@@ -56,5 +93,5 @@ export class ReportService {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
-    
+
 }

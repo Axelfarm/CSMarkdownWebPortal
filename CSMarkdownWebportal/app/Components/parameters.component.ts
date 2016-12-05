@@ -1,10 +1,11 @@
 ﻿//Nicholai Axelgaard
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Http, Headers } from '@angular/http'
 import { ReportService } from './../Services/report.service';
 
-import { Http, Headers } from '@angular/http';
 
 import { ReportModel } from './../Models/report.model';
+import { ParameterModel } from './../Models/parameter.model';
 
 
 @Component({
@@ -12,57 +13,60 @@ import { ReportModel } from './../Models/report.model';
     templateUrl: 'app/Views/parameters.component.html',
     styleUrls: ['app/Styles/parameters.component.css']
 })
-export class ParametersComponent implements OnInit {
-
-    //data: Array<Array<any>>;
+export class ParametersComponent {
     logError: any;
+    localParameters: Array<ParameterModel> = new Array<ParameterModel>();
 
     constructor(private reportService: ReportService, private http: Http, private reportModel: ReportModel) {
-        this.GetParameters();
     }
-
-    ngOnInit() {
-    }
-
-    // PT Is the report name hardcoded, but when it is made so that it sends the report to this component, then it will showhow
-    // set this.report to the received report object.
     GetParameters(): void {
-        //console.log(this.reportModel);
-        // These two lines of code are currently hardcoded, but in the future it needs to be replace by fx
-        // a report object defined at an earlier stage.
         if (this.reportModel.parameters.length > 0)
             this.reportModel.parameters = new Array();
         this.reportService.GetParameters().subscribe(
-            data => { for (let each of data as Array<Object>) this.reportModel.AddParameter(each); },
+            data => {
+                for (let each of data as Array<Object>)
+                    this.reportModel.AddParameter(each);
+            },
             err => this.logError = err,
-            () => this.reportModel
+            () => {
+                this.localParameters = new Array<ParameterModel>();
+                for (var p: number = 0; this.reportModel.parameters.length > p; p++) {
+                    this.localParameters.push(JSON.parse(JSON.stringify(this.reportModel.parameters[p])));
+                }
+                //for (var p: number = 0; this.localParameters.length > p; p++) {
+                //    if (this.localParameters[p].ParamType.toLowerCase().includes("[]") && this.localParameters[p].Value[this.localParameters[p].Value.length - 1] != "")
+                //        this.localParameters[p].Value.push("");
+                //}
+            }
         );
-        //console.log(this.reportModel);
     }
 
     SplitValueForMultipleInputFields(paramType: string, value: string): Array<Array<string>> {
         var splitValues: Array<Array<string>> = new Array<Array<string>>();
         if (paramType != undefined && paramType.toLowerCase().includes("date")) {
             var arrOfValues: Array<string> = value.split("T");
-            splitValues.push([ "date", arrOfValues[0] ]);
-            splitValues.push([ "time", arrOfValues[1] ]);
+            splitValues.push(["date", arrOfValues[0]]);
+            splitValues.push(["time", arrOfValues[1]]);
         }
         else
             splitValues.push(["text", value.trim()]);
         return splitValues;
     }
 
-    ShowReportInLog(err: any) {
+    GetParams(event: any) {
         this.GetParameters();
-        //console.log(this.reportModel);
+        console.log(this.reportModel.parameters);
     }
 
-    ShowReportInLog2(err: any) {
-        console.log(this.reportModel);
+    ShowReportInLog2(event: any) {
+        //this.localParameters = new Array<ParameterModel>();
+        //for (let parameter in this.reportModel.parameters)
+        //    this.localParameters.push(Object.assign({}, this.reportModel.parameters[parameter]) as ParameterModel);
+        console.log(this.localParameters);
     }
 
     RefreshReport() {
-
+        this.reportModel.parameters = JSON.parse(JSON.stringify(this.localParameters));
     }
 
     // Currently, when it comes to date and time, it is using two input fields. One for date
@@ -87,14 +91,90 @@ export class ParametersComponent implements OnInit {
     // it will read it as local time. Not sure if that will have any effect once it's send to the Report rendering,
     // since it just takes the value from the input field and sends it to the server as it is shown.
 
-     InputChanged(p: number, v: number, s: number, value: string, paramType: string){
-          if(paramType.toLowerCase().includes("date")){
-              var datetimesplit = this.reportModel.parameters[p].Value[v].split("T");
-              datetimesplit[s] = value;
-              this.reportModel.parameters[p].Value[v] = datetimesplit[0] + "T" + datetimesplit[1];
-          }
-          else {
-              this.reportModel.parameters[p].Value[v] = value;
-          }
-     }
+    name: string;
+    // s: number,  has been removed since it currently doesn't use split
+    InputChanged(p: number, v: number, event: KeyboardEvent) {
+        //if (paramType.toLowerCase().includes("date")) {
+        //    var datetimesplit = this.localParameters[p].Value[v].split("T");
+        //    datetimesplit[s] = (<HTMLInputElement>event.target).value;
+        //    this.localParameters[p].Value[v] = datetimesplit[0] + "T" + datetimesplit[1];
+        //}
+
+        //else
+        //if (this.localParameters[p].ParamType.toLowerCase().includes("[]") && this.localParameters[p].Value[this.localParameters[p].Value.length - 1] == "")
+        //    this.localParameters[p].Value.pop();
+        console.log("Change");
+        console.log(this.currentEvent);
+        console.log(event);
+        console.log(FocusEvent);
+
+        if (!this.localParameters[p].ParamType.toLowerCase().includes("date")) {
+
+            if ((<HTMLInputElement>event.currentTarget).value == "" && v != this.localParameters[p].Value.length - 1) {
+                //var index = this.reportModel.parameters[p].Value[v].indexOf("");
+                this.localParameters[p].Value.splice(v, 1);
+            }
+            else {
+                this.localParameters[p].Value[v] = (<HTMLInputElement>event.currentTarget).value;
+                //this.localParameters[p].Value[v] += event.key;
+
+            }
+
+        //this.localParameters[p].Value.push("");
+        }
+
+    }
+
+    //KeyUpRegistred(p: number, v: number, event: any) {
+    //    if (v == this.localParameters[p].Value.length - 1 && this.localParameters[p].ParamType.toLowerCase().includes("[]")) {
+    //        console.log(this.localParameters[p].Value.length);
+    //        //this.localParameters[p].Value.push("");
+    //        this.localParameters[p].Value[this.localParameters[p].Value.length] = "";
+    //        console.log(this.localParameters[p].Value.length);
+    //    }
+    //    console.log(event);
+    //}
+
+    //InputFocused(p: number, v: number, event: any) {
+    //    if (this.localParameters[p].ParamType.includes("[]") && this.localParameters[p].Value[this.localParameters[p].Value.length - 1] != "") {
+    //        this.localParameters[p].Value.push("");
+    //    }
+    //    else if (this.localParameters[p].ParamType.includes("[]") && this.localParameters[p].Value.length -1 == v)
+    //        this.localParameters[p].Value.push("");
+    //}
+    currentEvent: any;
+    InputGotFocus(p: number, v: number, event: any) {
+        this.currentEvent = event;
+        console.log(event);
+        //if (this.localParameters[p].Value[v].trim() == "")
+        //    (<HTMLInputElement>event.target).value = "";
+    }
+
+    InputLostFocus(p: number, v: number, event: FocusEvent) {
+        
+        if (this.localParameters[p].ParamType.toLowerCase().includes("date"))
+            this.localParameters[p].Value[v] = (<HTMLInputElement>event.currentTarget).value;
+
+
+        for (var i: number = 0; this.localParameters[p].Value.length > i; i++)
+            if (this.localParameters[p].Value[i].trim() == "" && this.localParameters[p].Value.length - 1 != i)
+                this.localParameters[p].Value.splice(i, 1);
+    }
+
+    AddNewBefore(p: number, v: number) {
+        this.localParameters[p].Value.splice(v, 0, "");
+    }
+
+    IsItAnArray(paramType: string): boolean {
+        if (paramType.toLowerCase().includes("[]"))
+            return true;
+        else
+            return false;
+    }
+    AddNewAtEnd(p: number) {
+        this.localParameters[p].Value.push("");
+    }
+    RemoveThis(p: number, v: number) {
+        this.localParameters[p].Value.splice(v, 1);
+    }
 }
