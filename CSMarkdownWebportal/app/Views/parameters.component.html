@@ -7,9 +7,12 @@
         <button pButton type="button" (click)="ShowReportInLog($event)" icon="fa fa-eye"></button>
         <button pButton type="button" (click)="RefreshReport()" icon="fa fa-refresh"></button>
         <button pButton type="button" (click)="ShowReportInLog2($event)" icon="fa fa-bug"></button>
+        <button pButton type="button" data-toggle="collapse" data-target="#par" icon="fa fa-eye"></button>
     </div>
 </p-toolbar>
-<div style="border-top: 1px solid black">
+<button data-toggle="collapse" data-target="#par">Collapse</button>
+
+<div id="par" class="collapse in" style="border-top: 1px solid black">
     <ul>
         <li *ngFor="let param of this.localParameters; let p = index" style="list-style:none; margin-top: 20px">
 
