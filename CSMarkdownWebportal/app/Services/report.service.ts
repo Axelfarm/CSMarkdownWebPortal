@@ -57,10 +57,10 @@ export class ReportService {
             }
             //console.log(this.params);
             //console.log(this.baseUrl + "render/" + this.reportModel.reportID + "?" + this.params);
-            return this.baseUrl + "render/" + this.reportModel.reportID + "?" + this.params;
+            return this.baseUrl + "render/" + this.reportModel.name + "?" + this.params;
         }
         else
-            return this.baseUrl + "render/" + this.reportModel.reportID;  //+ report.name;
+            return this.baseUrl + "render/" + this.reportModel.name;  //+ report.name;
     }
 
 
@@ -74,7 +74,7 @@ export class ReportService {
     //Nicholai Axelgaard
     GetParameters() {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
-        return this.http.get(this.baseUrl + "params/" + this.reportModel.reportID)
+        return this.http.get(this.baseUrl + "params/" + this.reportModel.name)
             .map(res => res.json());
 
         //return this.data;
