@@ -60,9 +60,6 @@ export class ReportService {
         else
             return this.baseUrl + "render/" + this.reportModel.reportID;  //+ report.name;
     }
-    //Mads Nørgaard
-    GetReports() {
-        return this.http.get(this.baseUrl + "getReports");
 
 
 
