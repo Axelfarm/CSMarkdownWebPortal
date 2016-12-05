@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-//import { routing, appRoutingProviders } from '../app.routing';
+import { RouterModule } from '@angular/router';
 //import { LocationStrategy, HashLocationStrategy } from '@angular/common'; 
 
 //Shared components
@@ -22,7 +22,7 @@ import { ReportModel } from './../Models/report.model';
 
 
 @NgModule({
-    imports: [BrowserModule, HttpModule, TreeModule, ToolbarModule, ButtonModule],
+    imports: [BrowserModule, HttpModule, RouterModule, TreeModule, ToolbarModule, ButtonModule],
     declarations: [AppComponent, ReportComponent, ReportsComponent, ParametersComponent],
     providers: [ReportService, ReportModel], //, { provide: LocationStrategy, useClass: HashLocationStrategy }
     bootstrap:    [ AppComponent ]

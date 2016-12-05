@@ -30,7 +30,7 @@
       'angular2-tree-component':   'node_modules/angular2-tree-component',
       'lodash':                    'node_modules/lodash',
       'primeng':                   'npm:primeng',
-      'file-saver':                'node_modules/file-saver/FileSaver.js'
+      'file-saver':                'node_modules/file-saver'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -50,6 +50,10 @@
           defaultExtension: 'js'
       },
       primeng: {
+          defaultExtension: 'js'
+      },
+      'file-saver': {
+          main: 'FileSaver.js',
           defaultExtension: 'js'
       }
       
