@@ -29,7 +29,7 @@ export class ReportsComponent implements OnInit {
     CreateTree(reports: ReportsModel, path: string = "") {
         var tree = new Array();
 
-        //Load in subdirectories 
+        //Load in subfolders
         for (var i = 0; i < reports.folders.length; i++) {
             tree.push({
                 'label': reports.folders[i].name,

@@ -11,7 +11,7 @@
 </p-toolbar>
 <div style="border-top: 1px solid black">
     <ul>
-        <li *ngFor="let param of this.reportModel.parameters; let k = index" style="list-style:none; margin-top: 20px">
+        <li *ngFor="let param of this.localParameters; let p = index" style="list-style:none; margin-top: 20px">
 
             <div style="border-top:solid; border-top-width:thin">
                 <label style="float:left">
@@ -19,15 +19,20 @@
                 </label>
                 <ul style="list-style:none">
                     <li *ngFor="let value of param.Value; let v = index" style="margin-top:5px">
-                        <div *ngFor="let val of SplitValueForMultipleInputFields(param.ParamType, value); let s = index" style="display:inline">
-                            <input #input type="{{val[0]}}" [value]="val[1]" (change)="InputChanged(k,v,s,input.value,param.ParamType)" />
-                        </div>
+
+                        <button (click)="AddNewBefore(p,v)" *ngIf="IsItAnArray(param.ParamType)">+</button>
+                        <input name="p{{p}}v{{v}}" type="{{param.ParamType}}" [value]="value" (change)="InputChanged(p,v,$event)" (focusout)="InputLostFocus(p,v,$event)" />
+                        <button (click)="RemoveThis(p,v)" *ngIf="IsItAnArray(param.ParamType)">-</button>
+
+                    </li>
+                    <li *ngIf="IsItAnArray(param.ParamType)">
+                        <button (click)="AddNewAtEnd(p)">Add new</button>
                     </li>
                 </ul>
             </div>
         </li>
     </ul>
     <button (click)="RefreshReport()">Refresh report with parameters</button>
-    <button (click)="ShowReportInLog($event)">Run GetParameters</button>
+    <button (click)="GetParams($event)">Run GetParameters</button>
     <button (click)="ShowReportInLog2($event)">Show ReportModel in Console log</button>
 </div>

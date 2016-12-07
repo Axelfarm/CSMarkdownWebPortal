@@ -34,9 +34,10 @@ export class ReportModel {
         // Var der enighed om, at man ikke skal kunne skrive 5-4 for at få 1, når det gjaldt datoer?????
 
         if (param.ParamType.toLowerCase().includes("date")) {
-            // Underneath it sets it to datetime-local, because if it is onlt "date", it will not show time.
+            // Underneath it sets it to datetime, because if it is only "date", it will not show time.
             // However, since the parameters.component is using two input fields, one for date and one for time,
-            // this currently doesn't have any effect. But in case it is decided to use one combined input
+            // this currently doesn't have any effect, other than what it returns to the server. 
+            // But in case it is decided to use one combined input
             // field for both date and time, then this makes sure that both definers are available.
             param.ParamType = "datetime-local";
             var date: Date = new Date();
@@ -120,9 +121,9 @@ export class ReportModel {
                     }
                 }
                 if (isItLocal)
-                    param.Value[i] = emptyDate.getFullYear().toString() + "-" + emptyDate.getMonth().toString() + "-" + emptyDate.getDate().toString() + "T" + ("0" + emptyDate.getHours().toString()).slice(-2) + ":" + ("0" + emptyDate.getMinutes().toString()).slice(-2) + ":" + ("0" + emptyDate.getSeconds().toString()).slice(-2);
+                    param.Value[i] = emptyDate.getFullYear().toString() + "-" + ("0" + emptyDate.getMonth().toString()).slice(-2)  + "-" + ("0" + emptyDate.getDate().toString()).slice(-2)  + "T" + ("0" + emptyDate.getHours().toString()).slice(-2) + ":" + ("0" + emptyDate.getMinutes().toString()).slice(-2) + ":" + ("0" + emptyDate.getSeconds().toString()).slice(-2);
                 else if (!isItLocal)
-                    param.Value[i] = emptyDate.getUTCFullYear().toString() + "-" + emptyDate.getUTCMonth().toString() + "-" + emptyDate.getUTCDate().toString() + "T" + ("0" + emptyDate.getUTCHours().toString()).slice(-2) + ":" + ("0" + emptyDate.getUTCMinutes().toString()).slice(-2) + ":" + ("0" + emptyDate.getUTCSeconds().toString()).slice(-2);
+                    param.Value[i] = emptyDate.getUTCFullYear().toString() + "-" + ("0" + emptyDate.getUTCMonth().toString()).slice(-2)  + "-" + ("0" + emptyDate.getUTCDate().toString()).slice(-2)  + "T" + ("0" + emptyDate.getUTCHours().toString()).slice(-2) + ":" + ("0" + emptyDate.getUTCMinutes().toString()).slice(-2) + ":" + ("0" + emptyDate.getUTCSeconds().toString()).slice(-2);
 
                 param.Value[i] = param.Value[i];
             }

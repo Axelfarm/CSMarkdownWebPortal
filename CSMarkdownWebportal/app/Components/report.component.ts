@@ -5,17 +5,15 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 import { Subject } from 'rxjs/Subject';
 import { ReportService } from './../Services/report.service';
-//import { Router, ActivatedRoute } from '@angular/router';
-var fileSaver = require('file-saver');
-import { ParameterModel } from './parameter.model';
+var FileSaver = require('file-saver');
+import { ParameterModel } from './../Models/parameter.model';
 
 
 
 @Component({
     selector: 'report-window',
     templateUrl: 'app/Views/report.component.html',
-    styleUrls: ['app/Styles/report.component.css'],
-    providers: []
+    styleUrls: ['app/Styles/report.component.css']
 
 })
 export class ReportComponent implements OnInit {
@@ -36,25 +34,22 @@ export class ReportComponent implements OnInit {
     ngOnInit() {
         var url = window.location.search;
         url = url.replace("?", "");
+        var params = url.split("&");
+
         if (url.length > 0) {
-            var params = url.split("&");
-
-            for (var param in params) {
-                var KeyValue = param.split("=");
-
-                if (KeyValue[0] == "filename") {
-                    this.reportService.reportModel.name = KeyValue[1];
+            for (var i = 0; i < params.length; i++) {
+                var keyValue = params[i].split('=');
+                console.log(keyValue);
+                if (keyValue[0] == "filename") {
+                    this.reportService.reportModel.name = keyValue[1];
                 }
-
-                else if (KeyValue[0] == "path") {
-                    this.reportService.reportModel.reportID = KeyValue[1];
+                else if (keyValue[0] == "path") {
+                    this.reportService.reportModel.reportID = keyValue[1];
                 }
-
                 else {
                     var parameter = new ParameterModel();
-
-                    parameter.Key = KeyValue[0];
-                    parameter.Value.push(KeyValue[1]);
+                    parameter.Key = keyValue[0];
+                    parameter.Value.push(keyValue[1]);
 
                     this.reportService.reportModel.parameters.push(parameter);
                 }
