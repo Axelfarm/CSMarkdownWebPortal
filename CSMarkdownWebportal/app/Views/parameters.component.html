@@ -1,18 +1,17 @@
 ﻿<!--Nicholai Axelgaard-->
 <p-toolbar>
-    <div class="ui-toolbar-group-left">
-        <label>Parametre</label>
-    </div>
-    <div class="ui-toolbar-group-right">
+    <div class="ui-toolbar-group-left"> 
         <button pButton type="button" (click)="ShowReportInLog($event)" icon="fa fa-eye"></button>
         <button pButton type="button" (click)="RefreshReport()" icon="fa fa-refresh"></button>
         <button pButton type="button" (click)="ShowReportInLog2($event)" icon="fa fa-bug"></button>
-        <button pButton type="button" data-toggle="collapse" data-target="#par" icon="fa fa-eye"></button>
+        <button pButton type="button" (click)="isCollapsed = !isCollapsed" icon="fa fa-eye"></button>
+    </div>
+    <div class="ui-toolbar-group-right">
+        <button pButton type="button" (click)="GetPdf()" icon="fa fa-floppy-o"></button>
     </div>
 </p-toolbar>
-<button data-toggle="collapse" data-target="#par">Collapse</button>
 
-<div id="par" class="collapse in" style="border-top: 1px solid black">
+<div id="par" style="border-top: 1px solid black" [collapse]="isCollapsed" (collapsed)="collapsed($event)" (expanded)="expanded($event)">
     <ul>
         <li *ngFor="let param of this.localParameters; let p = index" style="list-style:none; margin-top: 20px">
 
@@ -35,7 +34,7 @@
             </div>
         </li>
     </ul>
-    <button (click)="RefreshReport()">Refresh report with parameters</button>
+    <!--<button (click)="RefreshReport()">Refresh report with parameters</button>
     <button (click)="GetParams($event)">Run GetParameters</button>
-    <button (click)="ShowReportInLog2($event)">Show ReportModel in Console log</button>
+    <button (click)="ShowReportInLog2($event)">Show ReportModel in Console log</button>-->
 </div>

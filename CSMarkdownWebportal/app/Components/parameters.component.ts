@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Http, Headers } from '@angular/http'
 import { ReportService } from './../Services/report.service';
 
+import { CollapseDirective } from './../Services/collapse.directive';
 
 import { ReportModel } from './../Models/report.model';
 import { ParameterModel } from './../Models/parameter.model';
@@ -11,7 +12,8 @@ import { ParameterModel } from './../Models/parameter.model';
 @Component({
     selector: 'parameters',
     templateUrl: 'app/Views/parameters.component.html',
-    styleUrls: ['app/Styles/parameters.component.css']
+    styleUrls: ['app/Styles/parameters.component.css'],
+    providers: [CollapseDirective]
 })
 export class ParametersComponent {
     logError: any;
@@ -176,5 +178,15 @@ export class ParametersComponent {
     }
     RemoveThis(p: number, v: number) {
         this.localParameters[p].Value.splice(v, 1);
+    }
+
+    public isCollapsed: boolean = false;
+
+    public collapsed(event: any): void {
+
+    }
+
+    public expanded(event: any): void {
+
     }
 }

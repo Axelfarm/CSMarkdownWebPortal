@@ -6,7 +6,8 @@
   System.config({
     paths: {
       // paths serve as alias
-      'npm:': 'node_modules/'
+        'npm:': 'node_modules/'//,
+        //'ng2-bootstrap': 'node_modules/ng2-bootstrap'
     },
     // map tells the System loader where to look for things
     map: {
@@ -30,7 +31,9 @@
       'angular2-tree-component':   'node_modules/angular2-tree-component',
       'lodash':                    'node_modules/lodash',
       'primeng':                   'npm:primeng',
-      'file-saver':                'node_modules/file-saver/FileSaver.js'
+      'file-saver': 'node_modules/file-saver/FileSaver.js',
+      'ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
+      'moment': 'node_modules/moment/moment.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -51,8 +54,10 @@
       },
       primeng: {
           defaultExtension: 'js'
+      },
+      'ng2-bootstrap': {
+          defaultExtension: 'js'
       }
-      
     }
   });
 })(this);
