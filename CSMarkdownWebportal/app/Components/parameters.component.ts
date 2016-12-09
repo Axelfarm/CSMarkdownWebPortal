@@ -13,13 +13,13 @@ import { ParameterModel } from './../Models/parameter.model';
     selector: 'parameters',
     templateUrl: 'app/Views/parameters.component.html',
     styleUrls: ['app/Styles/parameters.component.css'],
-    providers: [CollapseDirective]
+    providers: []
 })
 export class ParametersComponent {
     logError: any;
     private localParameters: Array<ParameterModel> = new Array<ParameterModel>();
 
-    constructor(private reportService: ReportService, private http: Http, private reportModel: ReportModel) {
+    constructor(private reportService: ReportService, private http: Http, private reportModel: ReportModel, private collapse: CollapseDirective) {
     }
 
     private lastReportUsed: string = "";
@@ -50,7 +50,7 @@ export class ParametersComponent {
             );
         }
 
-        this.isCollapsed = !this.isCollapsed;
+        this.collapse.isCollapsed = !this.collapse.isCollapsed;
     }
 
     //SplitValueForMultipleInputFields(paramType: string, value: string): Array<Array<string>> {
@@ -178,7 +178,11 @@ export class ParametersComponent {
         this.localParameters[p].Value.splice(v, 1);
     }
 
-    public isCollapsed: boolean = true;
+    //public isCollapsed: boolean = true;
+
+    isCollapsed() {
+        return this.collapse.isCollapsed;
+    }
 
     public collapsed(event: any): void {
 

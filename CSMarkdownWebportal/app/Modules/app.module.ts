@@ -20,11 +20,12 @@ import { ReportService } from './../Services/report.service';
 //Shared models
 import { ReportModel } from './../Models/report.model';
 
+import { CollapseDirective } from './../Services/collapse.directive';
 
 @NgModule({
     imports: [BrowserModule, HttpModule, TreeModule, ToolbarModule, ButtonModule, CollapseModule],
     declarations: [AppComponent, ReportComponent, ReportsComponent, ParametersComponent],
-    providers: [ReportService, ReportModel], //, { provide: LocationStrategy, useClass: HashLocationStrategy }
+    providers: [ReportService, ReportModel, CollapseDirective], //, { provide: LocationStrategy, useClass: HashLocationStrategy }
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
