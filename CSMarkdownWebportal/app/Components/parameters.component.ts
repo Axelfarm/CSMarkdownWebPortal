@@ -17,7 +17,7 @@ import { ParameterModel } from './../Models/parameter.model';
 })
 export class ParametersComponent {
     logError: any;
-    localParameters: Array<ParameterModel> = new Array<ParameterModel>();
+    private localParameters: Array<ParameterModel> = new Array<ParameterModel>();
 
     constructor(private reportService: ReportService, private http: Http, private reportModel: ReportModel) {
     }
