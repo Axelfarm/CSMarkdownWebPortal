@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\Styles\app.component.css" />
+    <Content Include="app\Styles\primeng.css" />
     <Content Include="app\Styles\reports.component.css" />
     <Content Include="app\Styles\parameters.component.css" />
     <Content Include="app\Styles\report.component.css" />
