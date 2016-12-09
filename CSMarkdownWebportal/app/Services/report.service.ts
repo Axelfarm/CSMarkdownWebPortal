@@ -85,6 +85,12 @@ export class ReportService {
     //Nicholai Axelgaard
     GetParameters() {
         //return this.http.get(this.baseUrl + 'params/' + report.name).map(res => res.json());
+        if (this.reportModel.reportID != undefined && this.reportModel.reportID.length > 0)
+        {
+            return this.http.get(this.baseUrl + "params/" + this.reportModel.name + "?path=" + this.reportModel.reportID)
+                .map(res => res.json());
+        }
+        else
         return this.http.get(this.baseUrl + "params/" + this.reportModel.name)
             .map(res => res.json());
 
