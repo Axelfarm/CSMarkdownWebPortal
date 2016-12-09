@@ -22,13 +22,13 @@
                 <ul style="list-style:none">
                     <li *ngFor="let value of param.Value; let v = index" style="margin-top:5px">
 
-                        <button (click)="AddNewBefore(p,v)" *ngIf="IsItAnArray(param.ParamType)">+</button>
+                        <button (click)="AddNewBefore(p,v,$event)" *ngIf="param.IsArray">+</button>
                         <input name="p{{p}}v{{v}}" type="{{param.ParamType}}" [value]="value" (change)="InputChanged(p,v,$event)" (focusout)="InputLostFocus(p,v,$event)" />
-                        <button (click)="RemoveThis(p,v)" *ngIf="IsItAnArray(param.ParamType)">-</button>
+                        <button (click)="RemoveThis(p,v,$event)" *ngIf="param.IsArray">-</button>
 
                     </li>
-                    <li *ngIf="IsItAnArray(param.ParamType)">
-                        <button (click)="AddNewAtEnd(p)">Add new</button>
+                    <li *ngIf="param.IsArray">
+                        <button (click)="AddNewAtEnd(p,$event)">Add new</button>
                     </li>
                 </ul>
             </div>

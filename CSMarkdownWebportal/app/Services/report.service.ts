@@ -35,7 +35,7 @@ export class ReportService {
                 else
                     this.params += this.reportModel.parameters[p].Key + "=";
                 for (var v: number = 0; this.reportModel.parameters[p].Value.length > v; v++) {
-                    if (this.reportModel.parameters[p].Value[v].trim() != "") {
+                    if (this.reportModel.parameters[p].Value[v].trim() !== "") {
 
                         if (this.reportModel.parameters[p].ParamType.toLowerCase().includes("date")) {
                             if (v > 0)
@@ -49,6 +49,9 @@ export class ReportService {
                             else
                                 this.params += this.reportModel.parameters[p].Value[v];
                         }
+                        this.params = this.params.replace("=,", "=");
+                        this.params = this.params.replace(",,", ",");
+                        this.params = this.params.replace(",&", "&");
                     }
                     // else if (this.reportModel.parameters[p].Value[v].trim() == "") {
                     //    this.reportModel.parameters[p].Value.splice(v, 1);

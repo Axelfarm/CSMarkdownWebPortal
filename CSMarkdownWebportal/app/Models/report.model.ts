@@ -33,6 +33,11 @@ export class ReportModel {
 
         // Var der enighed om, at man ikke skal kunne skrive 5-4 for at få 1, når det gjaldt datoer?????
 
+        if (param.ParamType.toLowerCase().includes("[]"))
+            param.IsArray = true;
+        else
+            param.IsArray = false;
+
         if (param.ParamType.toLowerCase().includes("date")) {
             // Underneath it sets it to datetime, because if it is only "date", it will not show time.
             // However, since the parameters.component is using two input fields, one for date and one for time,

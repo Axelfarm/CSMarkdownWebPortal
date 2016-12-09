@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-//import { routing, appRoutingProviders } from '../app.routing';
+import { RouterModule } from '@angular/router';
 //import { LocationStrategy, HashLocationStrategy } from '@angular/common'; 
 
 //Shared components

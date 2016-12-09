@@ -27,7 +27,8 @@ export class ReportComponent implements OnInit {
         });*/
 
         //_router.routerState.root.queryParams.subscribe(data => console.log(data));
-       
+
+        //this.activatedRoute.queryParams.subscribe(param => console.log(param));
     }
 
     ngOnInit() {
@@ -57,13 +58,15 @@ export class ReportComponent implements OnInit {
     }
 
     GetPdf() {
+        console.log("hit start");
         this.reportService.GetPdf().subscribe(data => this.downloadFile(data));
     }
 
     private downloadFile(data: Response) {
         console.log("hit");
         var blob = new Blob([data], { type: 'application/pdf' });
-        FileSaver.saveAs(blob, this.reportService.reportModel.name + ".pdf");
+        console.log("hit 1");
+        fileSaver.saveAs(blob, this.reportService.reportModel.name + ".pdf"); console.log("hit 2");
         //var url = window.URL.createObjectURL(blob);
     }
     
