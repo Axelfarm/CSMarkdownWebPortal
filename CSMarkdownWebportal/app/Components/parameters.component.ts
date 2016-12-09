@@ -59,7 +59,7 @@ export class ParametersComponent {
 
     GetParams(event: any) {
         this.GetParameters();
-        console.log(this.reportModel.parameters);
+        //console.log(this.reportModel.parameters);
     }
 
     ShowReportInLog2(event: any) {
