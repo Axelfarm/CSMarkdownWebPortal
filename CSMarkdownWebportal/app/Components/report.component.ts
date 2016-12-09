@@ -66,7 +66,7 @@ export class ReportComponent implements OnInit {
         console.log("hit");
         var blob = new Blob([data], { type: 'application/pdf' });
         console.log("hit 1");
-        fileSaver.saveAs(blob, this.reportService.reportModel.name + ".pdf"); console.log("hit 2");
+        FileSaver.saveAs(blob, this.reportService.reportModel.name + ".pdf"); console.log("hit 2");
         //var url = window.URL.createObjectURL(blob);
     }
     
