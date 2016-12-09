@@ -21,30 +21,35 @@ export class ParametersComponent {
 
     constructor(private reportService: ReportService, private http: Http, private reportModel: ReportModel) {
     }
-    GetParameters(): void {
-        if (this.reportModel.parameters.length > 0 && this.isCollapsed)
-            this.reportModel.parameters = new Array();
-        this.reportService.GetParameters().subscribe(
-            data => {
-                for (let each of data as Array<Object>)
-                    this.reportModel.AddParameter(each);
-            },
-            err => this.logError = err,
-            () => {
-                this.localParameters = new Array<ParameterModel>();
-                for (var p: number = 0; this.reportModel.parameters.length > p; p++) {
-                    this.localParameters.push(JSON.parse(JSON.stringify(this.reportModel.parameters[p])));
-                    
-                }
-                //for (var p: number = 0; this.localParameters.length > p; p++) {
-                //    for (var v: number = 0; this.localParameters[p].Value.length > v; v++) {
 
-                //    }
-                //    if (this.localParameters[p].ParamType.toLowerCase().includes("[]") && this.localParameters[p].Value[this.localParameters[p].Value.length - 1] != "")
-                //        this.localParameters[p].Value.push("");
-                //}
-            }
-        );
+    private lastReportUsed: string = "";
+    GetParameters(): void {
+        if (this.localParameters != undefined && 1 > this.localParameters.length || this.reportService.reportModel.name != this.lastReportUsed) {
+            this.lastReportUsed = this.reportService.reportModel.name;
+            this.reportModel.parameters = new Array();
+            this.reportService.GetParameters().subscribe(
+                data => {
+                    for (let each of data as Array<Object>)
+                        this.reportModel.AddParameter(each);
+                },
+                err => this.logError = err,
+                () => {
+                    this.localParameters = new Array<ParameterModel>();
+                    for (var p: number = 0; this.reportModel.parameters.length > p; p++) {
+                        this.localParameters.push(JSON.parse(JSON.stringify(this.reportModel.parameters[p])));
+
+                    }
+                    //for (var p: number = 0; this.localParameters.length > p; p++) {
+                    //    for (var v: number = 0; this.localParameters[p].Value.length > v; v++) {
+
+                    //    }
+                    //    if (this.localParameters[p].ParamType.toLowerCase().includes("[]") && this.localParameters[p].Value[this.localParameters[p].Value.length - 1] != "")
+                    //        this.localParameters[p].Value.push("");
+                    //}
+                }
+            );
+        }
+
         this.isCollapsed = !this.isCollapsed;
     }
 
@@ -59,9 +64,17 @@ export class ParametersComponent {
     //        splitValues.push(["text", value.trim()]);
     //    return splitValues;
     //}
+    ResetParameters(event: any) {
+        this.localParameters = new Array<ParameterModel>();
+        for (var p: number = 0; this.reportModel.parameters.length > p; p++) {
+            this.localParameters.push(JSON.parse(JSON.stringify(this.reportModel.parameters[p])));
+
+        }
+    }
 
     GetParams(event: any) {
-        this.GetParameters();
+        if (this.localParameters != undefined && 1 > this.localParameters.length)
+            this.GetParameters();
         //console.log(this.reportModel.parameters);
     }
 
@@ -100,12 +113,12 @@ export class ParametersComponent {
             //    this.localParameters[p].Value.splice(v, 1);
             //}
             //else {
-                this.localParameters[p].Value[v] = (<HTMLInputElement>event.currentTarget).value;
-                //this.localParameters[p].Value[v] += event.key;
+            this.localParameters[p].Value[v] = (<HTMLInputElement>event.currentTarget).value;
+            //this.localParameters[p].Value[v] += event.key;
 
             //}
 
-        //this.localParameters[p].Value.push("");
+            //this.localParameters[p].Value.push("");
         }
 
     }
@@ -137,7 +150,7 @@ export class ParametersComponent {
     //}
 
     InputLostFocus(p: number, v: number, event: FocusEvent) {
-        
+
         if (this.localParameters[p].ParamType.toLowerCase().includes("date"))
             this.localParameters[p].Value[v] = (<HTMLInputElement>event.currentTarget).value;
 
