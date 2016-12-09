@@ -22,7 +22,7 @@ export class ParametersComponent {
     constructor(private reportService: ReportService, private http: Http, private reportModel: ReportModel) {
     }
     GetParameters(): void {
-        if (this.reportModel.parameters.length > 0 && this.isCollapsed)
+        if (this.reportModel.parameters.length > 0 && !this.isCollapsed)
             this.reportModel.parameters = new Array();
         this.reportService.GetParameters().subscribe(
             data => {

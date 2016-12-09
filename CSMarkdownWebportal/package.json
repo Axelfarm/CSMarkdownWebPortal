@@ -63,6 +63,8 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "lite-server": "^2.2.2",
     "lodash": "^4.16.4",
+    "moment": "^2.17.1",
+    "ng2-bootstrap": "^1.1.16",
     "primeng": "^1.0.0",
     "protractor": "4.0.9",
     "rimraf": "^2.5.4",

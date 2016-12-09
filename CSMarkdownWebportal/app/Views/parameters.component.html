@@ -1,13 +1,13 @@
 ﻿<!--Nicholai Axelgaard-->
 <p-toolbar>
     <div class="ui-toolbar-group-left"> 
-        <button pButton type="button" (click)="GetParameters($event)" icon="fa fa-eye"></button>
-        <button pButton type="button" (click)="RefreshReport()" icon="fa fa-refresh"></button>
-        <button pButton type="button" (click)="ShowReportInLog2($event)" icon="fa fa-bug"></button>
+        <button pButton type="button" label="Vis Parametre" (click)="GetParameters($event)" icon="fa fa-eye"></button>
+        <button pButton type="button" label="Opdatere Rapport" (click)="RefreshReport()" icon="fa fa-refresh"></button>
+        <!--<button pButton type="button" (click)="ShowReportInLog2($event)" icon="fa fa-bug"></button>-->
         <!--<button pButton type="button" (click)="isCollapsed = !isCollapsed" icon="fa fa-eye"></button>-->
     </div>
     <div class="ui-toolbar-group-right">
-        <button pButton type="button" (click)="GetPdf()" icon="fa fa-floppy-o"></button>
+        <button pButton type="button" label="Gem til PDF" (click)="GetPdf()" icon="fa fa-floppy-o"></button>
     </div>
 </p-toolbar>
 
