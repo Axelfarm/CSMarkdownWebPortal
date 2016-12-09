@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { ReportsModel } from './../Models/reports.model';
+import { CollapseDirective } from './../Services/collapse.directive';
 
 @Component({
     selector: 'reports',
@@ -19,7 +20,7 @@ export class ReportsComponent implements OnInit {
     reports = new ReportsModel();
     tree: any; //JSON Array
 
-    constructor(private reportService: ReportService) {
+    constructor(private reportService: ReportService, private collapse: CollapseDirective) {
     }
     
     ngOnInit() {
@@ -71,6 +72,7 @@ export class ReportsComponent implements OnInit {
 
         this.reportService.reportModel.name = event.node.label;
         this.reportService.reportModel.reportID = event.node.path;
+        this.collapse.isCollapsed = true;
     }
 
     //Not in use

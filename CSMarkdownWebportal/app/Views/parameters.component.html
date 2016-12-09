@@ -11,7 +11,7 @@
     </div>
 </p-toolbar>
 
-<div id="par" style="border-top: 1px solid black" [collapse]="isCollapsed" (collapsed)="collapsed($event)" (expanded)="expanded($event)">
+<div id="par" style="border-top: 1px solid black" [collapse]="isCollapsed()" (collapsed)="collapsed($event)" (expanded)="expanded($event)">
     <ul>
         <li *ngFor="let param of this.localParameters; let p = index" style="list-style:none; margin-top: 20px">
 
