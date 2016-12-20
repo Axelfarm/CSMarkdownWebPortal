@@ -29,6 +29,7 @@ export class ParametersComponent {
             this.reportModel.parameters = new Array();
             this.reportService.GetParameters().subscribe(
                 data => {
+                    //console.log(data);
                     for (let each of data as Array<Object>)
                         this.reportModel.AddParameter(each);
                 },

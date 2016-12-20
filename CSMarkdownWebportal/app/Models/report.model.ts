@@ -41,6 +41,9 @@ export class ReportModel {
         if (param.ParamType.toLowerCase().trim() === "int" || param.ParamType.toLowerCase().trim() === "double")
             param.ParamType = "number";
 
+        if (param.ParamType.toLowerCase().trim() === "string")
+            param.ParamType = "text";
+
         if (param.ParamType.toLowerCase().includes("date")) {
             // Underneath it sets it to datetime, because if it is only "date", it will not show time.
             // However, since the parameters.component is using two input fields, one for date and one for time,
