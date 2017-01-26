@@ -20,10 +20,12 @@
                     {{param.Key}}
                 </label>
                 <ul style="list-style:none">
-                    <li *ngFor="let value of param.Value; let v = index" style="margin-top:5px">
+                    <li *ngFor="let inputName of this.inputFieldNames[p]; let v = index" style="margin-top:5px">
 
                         <button (click)="AddNewBefore(p,v,$event)" *ngIf="param.IsArray">+</button>
-                        <input name="p{{p}}v{{v}}" type="{{param.ParamType}}" [value]="value" (change)="InputChanged(p,v,$event)" (focusout)="InputLostFocus(p,v,$event)" />
+
+                        <paraminput [name]="inputName" [defaultContent]="param.Value[v]" [paramType]="param.ParamType" (newContent)="NewContent($event, p, v)"></paraminput>
+
                         <button (click)="RemoveThis(p,v,$event)" *ngIf="param.IsArray">-</button>
 
                     </li>

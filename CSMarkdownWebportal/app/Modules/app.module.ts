@@ -10,6 +10,7 @@ import { AppComponent } from './../Components/app.component';
 import { ReportComponent } from './../Components/report.component';
 import { ParametersComponent } from './../Components/parameters.component';
 import { ReportsComponent } from './../Components/reports.component';
+import { ParamInputComponent } from './../Components/paraminput.component';
 //import { TreeModule } from 'angular2-tree-component';
 import { InputTextModule, TreeModule, ToolbarModule, ButtonModule } from 'primeng/primeng';
 import { CollapseModule } from 'ng2-bootstrap';
@@ -24,7 +25,7 @@ import { CollapseDirective } from './../Services/collapse.directive';
 
 @NgModule({
     imports: [BrowserModule, HttpModule, TreeModule, ToolbarModule, ButtonModule, CollapseModule],
-    declarations: [AppComponent, ReportComponent, ReportsComponent, ParametersComponent],
+    declarations: [AppComponent, ReportComponent, ReportsComponent, ParametersComponent, ParamInputComponent],
     providers: [ReportService, ReportModel, CollapseDirective], //, { provide: LocationStrategy, useClass: HashLocationStrategy }
     bootstrap:    [ AppComponent ]
 })

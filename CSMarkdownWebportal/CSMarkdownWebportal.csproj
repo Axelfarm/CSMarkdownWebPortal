@@ -76,6 +76,7 @@
     <Content Include="app\Tests\Documents\TestFile.html" />
     <Content Include="app\Views\app.component.html" />
     <Content Include="app\Views\parameters.component.html" />
+    <Content Include="app\Views\paraminput.component.html" />
     <Content Include="app\Views\report.component.html" />
     <Content Include="app\Views\reports.component.html" />
     <Content Include="css\cerulean.css" />
@@ -126,6 +127,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\Components\paraminput.component.ts" />
     <TypeScriptCompile Include="app\Services\collapse.directive.ts" />
     <TypeScriptCompile Include="app\Components\parameters.component.ts" />
     <TypeScriptCompile Include="app\Components\report.component.ts" />

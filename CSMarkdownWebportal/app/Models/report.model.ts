@@ -52,7 +52,7 @@ export class ReportModel {
             // field for both date and time, then this makes sure that both definers are available.
             param.ParamType = "datetime-local";
             var date: Date = new Date();
-            var emptyDate: Date = new Date(1970, 1, 1, 0, 0, 0);
+            var emptyDate: Date = new Date(1970, 0, 1, 0, 0, 0);
 
             for (var i: number = 0; param.Value.length > i; i++) {
                 var isItLocal: boolean;
@@ -132,9 +132,9 @@ export class ReportModel {
                     }
                 }
                 if (isItLocal)
-                    param.Value[i] = emptyDate.getFullYear().toString() + "-" + ("0" + emptyDate.getMonth().toString()).slice(-2)  + "-" + ("0" + emptyDate.getDate().toString()).slice(-2)  + "T" + ("0" + emptyDate.getHours().toString()).slice(-2) + ":" + ("0" + emptyDate.getMinutes().toString()).slice(-2) + ":" + ("0" + emptyDate.getSeconds().toString()).slice(-2);
+                    param.Value[i] = emptyDate.getFullYear().toString() + "-" + ("0" + (1 + emptyDate.getMonth()).toString()).slice(-2) + "-" + ("0" + emptyDate.getDate().toString()).slice(-2) + "T" + ("0" + emptyDate.getHours().toString()).slice(-2) + ":" + ("0" + emptyDate.getMinutes().toString()).slice(-2) + ":" + ("0" + emptyDate.getSeconds().toString()).slice(-2);
                 else if (!isItLocal)
-                    param.Value[i] = emptyDate.getUTCFullYear().toString() + "-" + ("0" + emptyDate.getUTCMonth().toString()).slice(-2)  + "-" + ("0" + emptyDate.getUTCDate().toString()).slice(-2)  + "T" + ("0" + emptyDate.getUTCHours().toString()).slice(-2) + ":" + ("0" + emptyDate.getUTCMinutes().toString()).slice(-2) + ":" + ("0" + emptyDate.getUTCSeconds().toString()).slice(-2);
+                    param.Value[i] = emptyDate.getUTCFullYear().toString() + "-" + ("0" + (1 + emptyDate.getUTCMonth()).toString()).slice(-2) + "-" + ("0" + emptyDate.getUTCDate().toString()).slice(-2) + "T" + ("0" + emptyDate.getUTCHours().toString()).slice(-2) + ":" + ("0" + emptyDate.getUTCMinutes().toString()).slice(-2) + ":" + ("0" + emptyDate.getUTCSeconds().toString()).slice(-2);
 
                 param.Value[i] = param.Value[i];
             }

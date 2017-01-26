@@ -22,6 +22,22 @@ export class ParametersComponent {
     constructor(private reportService: ReportService, private http: Http, private reportModel: ReportModel, private collapse: CollapseDirective) {
     }
 
+
+    inputFieldNames: Array<Array<string>>;
+    GenerateArrayOfInput() {
+        this.inputFieldNames = new Array<Array<string>>();
+        for (var p: number = 0; this.localParameters.length > p; p++) {
+            this.inputFieldNames.push(new Array<string>());
+            for (var v: number = 0; this.localParameters[p].Value.length > v; v++) {
+                this.inputFieldNames[p].push(("00" + p.toString().slice(-3)) + "." + ("00" + v.toString().slice(-3)));
+            }
+        }
+        console.log(this.inputFieldNames);
+    }
+
+
+
+
     private lastReportUsed: string = "";
     GetParameters(): void {
         if (this.localParameters != undefined && 1 > this.localParameters.length || this.reportService.reportModel.name != this.lastReportUsed) {
@@ -47,6 +63,7 @@ export class ParametersComponent {
                     //    if (this.localParameters[p].ParamType.toLowerCase().includes("[]") && this.localParameters[p].Value[this.localParameters[p].Value.length - 1] != "")
                     //        this.localParameters[p].Value.push("");
                     //}
+                    this.GenerateArrayOfInput();
                 }
             );
         }
@@ -71,8 +88,8 @@ export class ParametersComponent {
             this.localParameters.push(JSON.parse(JSON.stringify(this.reportModel.parameters[p])));
 
         }
+        this.GenerateArrayOfInput();
     }
-
     GetParams(event: any) {
         if (this.localParameters != undefined && 1 > this.localParameters.length)
             this.GetParameters();
@@ -88,6 +105,10 @@ export class ParametersComponent {
 
     RefreshReport() {
         this.reportService.reportModel.parameters = JSON.parse(JSON.stringify(this.localParameters));
+    }
+    NewContent(value: string, p: number, v: number) {
+        this.localParameters[p].Value[v] = value;
+
     }
 
     name: string;
@@ -163,6 +184,7 @@ export class ParametersComponent {
 
     AddNewBefore(p: number, v: number, event: any) {
         this.localParameters[p].Value.splice(v, 0, "");
+        this.GenerateArrayOfInput();
     }
 
     //IsItAnArray(paramType: string): boolean {
@@ -174,9 +196,11 @@ export class ParametersComponent {
 
     AddNewAtEnd(p: number, event: any) {
         this.localParameters[p].Value.push("");
+        this.GenerateArrayOfInput();
     }
     RemoveThis(p: number, v: number, event: any) {
         this.localParameters[p].Value.splice(v, 1);
+        this.GenerateArrayOfInput();
     }
 
     //public isCollapsed: boolean = true;
